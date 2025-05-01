@@ -3,19 +3,30 @@ import { Button } from "../../ui/button";
 
 function Hero() {
   return (
-    <div className=" max-w-6xl mx-auto px-4 md:px-0 flex flex-col md:flex-row justify-between items-center mt-0 md:mt-4 gap-8 md:gap-0">
-      <div className="flex flex-col gap-6 w-full md:w-[657px] items-start">
-        <h1 className="text-[35px] md:text-[55px] font-bold leading-tight">
-          Lessons and insights <span className="text-oren">from 8 years</span>
-        </h1>
-        <p className="text-sm md:text-base dark:text-white text-abu">
-          Where to grow your business as a photographer: site or social media?
-        </p>
-        <Button className="text-sm md:text-base">
-          <Link to="/register">Konsultasi</Link>
-        </Button>
+    <div class="relative  h-[calc(100vh-64px)] mt-[64px] w-full">
+      <img
+        src="/assets/hero.png"
+        alt="Hero Image"
+        class="absolute h-full w-full object-cover"
+      />
+
+      <div class="absolute inset-0 bg-black opacity-70"></div>
+
+      <div class="absolute top-[170px] left-14 z-10">
+        <div class="flex flex-col gap-4 w-[657px]">
+          <h1 class="text-[50px] tracking-tight leading-tight font-bold text-white">
+            Solusi Terbaik{" "}
+            <span className="text-oren">Untuk UMKM dan Industri Kuliner</span>
+          </h1>
+          <p className="text-gray-300">
+            Bersama PT JAS, kami menghadirkan produk berkualitas tinggi dan
+            layanan andal untuk mendukung pertumbuhan bisnis Anda.
+          </p>
+          <Link to="/">
+            <Button>Konsultasi</Button>
+          </Link>
+        </div>
       </div>
-      <img src="/assets/hero.png" alt="" className="w-full md:w-[550px]" />
     </div>
   );
 }

@@ -11,7 +11,7 @@ function Navbar() {
     : "/assets/logo-white.png";
 
   return (
-    <nav className="max-w-6xl mx-auto px-4 md:px-0 flex justify-between items-center my-2">
+    <nav className="px-4 md:px-10 flex z-20 justify-between bg-white dark:bg-black fixed top-0 w-full items-center shadow-2xl dark:border-b-[1px] dark:border-white">
       <img src={logoSrc} alt="Logo" className="w-28" />
       <DesktopNavbar isDarkMode={isDarkMode} />
       <MobileNavbar isDarkMode={isDarkMode} />

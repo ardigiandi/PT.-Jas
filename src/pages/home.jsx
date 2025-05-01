@@ -1,9 +1,8 @@
 import BusinessPage from '@/components/fragments/homepage/Business'
-import Business from '@/components/fragments/homepage/Business'
 import Client from '@/components/fragments/homepage/Client'
 import Hero from '@/components/fragments/homepage/Hero'
-import ManagePage from '@/components/fragments/homepage/Manage'
-import UnseenPage from '@/components/fragments/homepage/Unseen'
+import VisiMisi from '@/components/fragments/homepage/VisiMisi'
+import TentangKami from '@/components/fragments/homepage/Tentang'
 import React from 'react'
 
 function  HomePage() {
@@ -11,8 +10,8 @@ function  HomePage() {
     <section>
       <Hero />
       <Client />
-      <ManagePage />
-      <UnseenPage />
+      <TentangKami/>
+      <VisiMisi />
       <BusinessPage />
     </section>
   )
