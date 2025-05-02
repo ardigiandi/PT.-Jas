@@ -12,9 +12,9 @@ function Hero() {
 
       <div class="absolute inset-0 bg-black opacity-70"></div>
 
-      <div class="absolute top-[170px] left-14 z-10">
-        <div class="flex flex-col gap-4 w-[657px]">
-          <h1 class="text-[50px] tracking-tight leading-tight font-bold text-white">
+      <div class="absolute top-[170px] lg:left-14 left-5 z-10">
+        <div class="flex flex-col gap-4 w-full lg:w-[657px]">
+          <h1 class="lg:text-[50px] text-4xl tracking-tight leading-tight font-bold text-white">
             Solusi Terbaik{" "}
             <span className="text-oren">Untuk UMKM dan Industri Kuliner</span>
           </h1>

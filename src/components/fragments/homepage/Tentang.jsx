@@ -3,7 +3,7 @@ import React from "react";
 
 function TentangKami() {
   return (
-    <div className="mt-[200px] flex flex-col gap-6 lg:gap-0 lg:flex-row justify-between items-center max-w-6xl mx-auto px-4 md:px-0">
+    <div className="lg:mt-[200px] mt-[100px]  flex flex-col gap-6 lg:gap-0 lg:flex-row justify-between items-center max-w-6xl mx-auto px-5 md:px-0">
       <img
         src="/assets/depan.png"
         alt=""
