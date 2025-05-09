@@ -25,7 +25,7 @@ const cards = [
 
 function BusinessPage() {
   return (
-    <div className="bg-bg-abu h-full mt-[200px] px-8 lg:px-[100px] py-[84px]">
+    <div className="bg-bg-abu h-full mt-[150px] px-8 lg:px-[100px] py-[84px]">
       <div className="flex flex-col lg:flex-row gap-7 lg:gap-0 items-center justify-between">
         <div className="flex flex-col gap-2 w-full lg:w-[430px]">
           <h1 className="text-4xl font-bold">

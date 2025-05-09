@@ -1,9 +1,9 @@
 import React from 'react'
 
-function NotFounPage() {
+function NotFoundPage() {
   return (
     <div>NotFounPage</div>
   )
 }
 
-export default NotFounPage
+export default NotFoundPage

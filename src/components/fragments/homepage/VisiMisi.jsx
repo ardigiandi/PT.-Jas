@@ -2,7 +2,7 @@ import React from "react";
 
 function VisiMisi() {
   return (
-    <div className="lg:mt-[200px] mt-[100px] max-w-6xl mx-auto px-4 md:px-0">
+    <div className="mt-[150px] max-w-6xl mx-auto px-4 md:px-0">
       <div className="flex flex-col items-center gap-4">
         <h1 className="text-4xl leading-snug text-center lg:w-[490px] font-semibold">
           Visi dan Misi

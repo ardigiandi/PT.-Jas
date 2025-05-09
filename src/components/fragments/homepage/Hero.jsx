@@ -3,18 +3,18 @@ import { Button } from "../../ui/button";
 
 function Hero() {
   return (
-    <div class="relative  h-[calc(100vh-64px)] mt-[64px] w-full">
+    <div className="relative  h-[calc(100vh-64px)] mt-[64px] w-full">
       <img
         src="/assets/hero.png"
         alt="Hero Image"
-        class="absolute h-full w-full object-cover"
+        className="absolute h-full w-full object-cover" 
       />
 
-      <div class="absolute inset-0 bg-black opacity-70"></div>
+      <div className="absolute inset-0 bg-black opacity-70"></div>
 
-      <div class="absolute top-[170px] lg:left-14 left-5 z-10">
-        <div class="flex flex-col gap-4 w-full lg:w-[657px]">
-          <h1 class="lg:text-[50px] text-4xl tracking-tight leading-tight font-bold text-white">
+      <div className="absolute top-[170px] lg:left-14 left-5 z-10">
+        <div className="flex flex-col gap-4 w-full lg:w-[657px]">
+          <h1 className="lg:text-[50px] text-4xl tracking-tight leading-tight font-bold text-white">
             Solusi Terbaik{" "}
             <span className="text-oren">Untuk UMKM dan Industri Kuliner</span>
           </h1>
