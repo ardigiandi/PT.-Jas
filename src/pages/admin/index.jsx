@@ -7,7 +7,7 @@ const Dashboard = () => {
   const [formData, setFormData] = useState({ image: null, description: "" });
 
   // URL API Laravel
-  const apiUrl = "http://your-laravel-backend.test/api/content";
+  const apiUrl = "http://localhost:3001/content";
 
   // Ambil data dari backend saat komponen pertama kali dimuat
   useEffect(() => {

@@ -1,0 +1,34 @@
+{
+  "content": [
+    {
+      "id": "1",
+      "image_url": "https://via.placeholder.com/150",
+      "description": "This is the first dummy content."
+    },
+    {
+      "id": "3",
+      "image_url": "https://via.placeholder.com/150",
+      "description": "This is the third dummy content."
+    },
+    {
+      "id": "4",
+      "image_url": "https://via.placeholder.com/154",
+      "description": "This is the first dummy content."
+    },
+    {
+      "id": "5",
+      "image_url": "https://via.placeholder.com/150",
+      "description": "This is the third dummy content."
+    },
+    {
+      "id": "6",
+      "image_url": "https://via.placeholder.com/150",
+      "description": "This is the third dummy content."
+    },
+    {
+      "id": "7",
+      "image_url": "https://via.placeholder.com/150",
+      "description": "This is the third dummy content."
+    }
+  ]
+}
