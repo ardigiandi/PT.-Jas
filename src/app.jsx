@@ -3,8 +3,7 @@ import HomePage from "./pages/user/home";
 import Service from "./pages/user/service";
 import NotFounPage from "./pages/notfoundpage";
 import Navbar from "./components/fragments/navbar/Navbar";
-import Dashboard from "./pages/admin/dashboard";
-import Settings from "./pages/admin/settings";
+import Dashboard from "./pages/admin";
 import Login from "./pages/auth/login";
 import AdminRoutes from "./routes/AdminRoutes";
 
@@ -29,8 +28,7 @@ function App() {
 
         {/* Rute Admin */}
         <Route element={<AdminRoutes />}>
-          <Route path="/admin/dashboard" element={<Dashboard />} />
-          <Route path="/admin/settings" element={<Settings />} />
+          <Route path="/admin" element={<Dashboard />} />
         </Route>
       </Routes>
     </>
