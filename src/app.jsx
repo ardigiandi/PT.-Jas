@@ -3,9 +3,10 @@ import HomePage from "./pages/user/home";
 import Service from "./pages/user/service";
 import NotFounPage from "./pages/notfoundpage";
 import Navbar from "./components/fragments/navbar/Navbar";
-import Dashboard from "./pages/admin";
+import Dashboard from "./pages/admin/dashboard";
 import Login from "./pages/auth/login";
 import AdminRoutes from "./routes/AdminRoutes";
+import Profile from "./pages/admin/profile";
 
 function App() {
   const location = useLocation();
@@ -29,6 +30,7 @@ function App() {
         {/* Rute Admin */}
         <Route element={<AdminRoutes />}>
           <Route path="/admin" element={<Dashboard />} />
+          <Route path="/admin/profile" element={<Profile />} />
         </Route>
       </Routes>
     </>
