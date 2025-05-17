@@ -3,15 +3,16 @@ import {
   LucideSettings,
   LucideBarChart2,
   LucideUser,
+  LucideLogIn,
 } from "lucide-react";
 import { Link } from "react-router";
 
 const AdminLayout = ({ children }) => {
   return (
     <div className="min-h-screen bg-gray-100 p-4">
-      <div className="grid grid-cols-12 gap-4">
+      <div className="flex gap-4">
         {/* Sidebar */}
-        <aside className="col-span-3 bg-white rounded-2xl shadow p-4">
+        <aside className="w-[250px] bg-white rounded-2xl shadow h-screen p-4">
           <div className="space-y-4">
             <div className="text-2xl font-bold">My Dashboard</div>
             <nav className="space-y-2">
@@ -30,6 +31,10 @@ const AdminLayout = ({ children }) => {
               <button className="flex items-center space-x-2 p-2 w-full text-left rounded-lg hover:bg-gray-200">
                 <LucideSettings className="w-5 h-5" />
                 <span>Settings</span>
+              </button>
+              <button className="flex items-center space-x-2 p-2 w-full text-left rounded-lg hover:bg-gray-200">
+                <LucideLogIn className="w-5 h-5" />
+                <span>Login</span>
               </button>
             </nav>
           </div>
