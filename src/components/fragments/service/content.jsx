@@ -15,7 +15,7 @@ const cardList = [
     id: 2,
     title: "Search engine",
     subtitle: "Optimization",
-    textColor: 'bg-[#FFFFFF]',
+    textColor: 'bg-[#FFFFFF] dark:text-black',
     description: "Learn more",
     desc_image: "/assets/arrow.svg",
     image: "/assets/service1.svg",
@@ -25,7 +25,7 @@ const cardList = [
     id: 3,
     title: "Search engine",
     subtitle: "Optimization",
-    textColor: 'bg-[#FFFFFF]',
+    textColor: 'bg-[#FFFFFF] dark:text-black',
     description: "Learn more",
     desc_image: "/assets/arrow.svg",
     image: "/assets/service1.svg",
@@ -45,12 +45,12 @@ const cardList = [
 
 function ContentPage() {
   return (
-    <div className="max-w-6xl mx-auto my-[120px] flex flex-col gap-[85px]">
-      <div className="flex items-center gap-10">
+    <div className="max-w-6xl mx-auto my-[120px] flex flex-col gap-[85px] px-5 lg:px-0">
+      <div className="flex flex-col lg:flex-row items-center gap-6 lg:gap-10">
         <h1 className="text-3xl font-medium bg-oren w-fit px-2 py-1">
           Services
         </h1>
-        <p className="text-base w-[580px] font-normal">
+        <p className="text-base w-full lg:w-[580px] font-normal text-center lg:text-left">
           At our digital marketing agency, we offer a range of services to help
           businesses grow and succeed online. These services include:
         </p>
@@ -60,9 +60,9 @@ function ContentPage() {
         {cardList.map((card, index) => (
           <div
             key={index}
-            className={`flex gap-12 p-[50px] rounded-4xl border border-black shadow-service ${card.bgColor}`}
+            className={`flex flex-col lg:flex-row gap-12 p-[50px] rounded-4xl border border-black shadow-service ${card.bgColor}`}
           >
-            <div className="flex flex-col justify-between">
+            <div className="flex flex-col justify-between gap-6 lg:gap-0">
               <div>
                 <h1 className={`text-2xl font-medium p-1 w-fit rounded-sm ${card.textColor}`}>
                   {card.title}

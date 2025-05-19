@@ -3,7 +3,7 @@ import React from "react";
 function Klien() {
   return (
     <div className="max-w-6xl mx-auto px-4 md:px-0 mt-[130px]">
-      <h1 className="text-[28px] font-semibold bg-oren w-fit mx-auto px-2 py-1">
+      <h1 className="text-[28px] font-semibold bg-oren w-fit mx-auto px-2 py-1 rounded-xs">
         Klien Kami
       </h1>
       <p className="text-base text-gray-500 text-center mt-2">

@@ -40,7 +40,7 @@ function BusinessPage() {
           {services.map((item, index) => (
             <div key={index} className="flex gap-3 items-center">
               {/* <img src={item.image} alt={item.description} className="w-[48px]" /> */}
-              <div className="flex flex-col">
+              <div className="flex flex-col text-center lg:text-left">
                 <h1 className="text-[28px] text-gray-800 font-semibold">
                   {item.title}
                 </h1>
