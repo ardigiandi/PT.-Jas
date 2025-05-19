@@ -25,7 +25,7 @@ const services = [
 
 function BusinessPage() {
   return (
-    <div className="bg-gray-100 h-full mt-[150px] px-8 lg:px-[100px] py-[84px]">
+    <div className="bg-[#F3F3F3] h-full mt-[150px] px-8 lg:px-[100px] py-[84px]">
       <div className="flex flex-col lg:flex-row gap-7 lg:gap-0 items-center justify-between">
         <div className="flex flex-col gap-4 w-full lg:w-[430px]">
           <h1 className="text-4xl font-bold leading-snug">

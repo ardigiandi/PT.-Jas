@@ -1,9 +1,14 @@
+import Footer from "@/components/fragments/footer/footer";
+import ContentPage from "@/components/fragments/service/content";
+import Hero from "@/components/fragments/service/hero";
 
 
 function Service() {
   return (
     <div>
-        <h1>Service</h1>
+        <Hero />
+        <ContentPage />
+        <Footer />
     </div>
   );
 }

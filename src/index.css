@@ -15,6 +15,8 @@
   --shadow-glow: 0 0 8px rgba(0, 128, 255, 0.6);
   --shadow-deep: 0 4px 6px rgba(0, 0, 0, 0.2), 0 10px 20px rgba(0, 0, 0, 0.15);
   --shadow-card: 0 4px 6px rgba(0, 0, 0, 0.1), 0 10px 20px rgba(255, 255, 255, 0.2);
+  --shadow-service: 0px 5px 0px 0px #191A23;
+  --shadow-image: 3px 0px 0px 0px #191A23;
   --shadow-inner-glow: inset 0 2px 4px rgba(255, 255, 255, 0.2);
 }
 
