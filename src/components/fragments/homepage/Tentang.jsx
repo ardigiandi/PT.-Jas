@@ -20,7 +20,7 @@ function TentangKami() {
           sebagai supplier peralatan dapur komersial berbagia merk dengan harga
           terjangkau guna memenuhi permintaan pasar.
         </p>
-        <Button>Learn More</Button>
+        <Button>Kontak Kami</Button>
       </div>
     </div>
   );

@@ -1,12 +1,10 @@
 import { Routes, Route, useLocation } from "react-router-dom";
-import HomePage from "./pages/user/home";
-import Service from "./pages/user/service";
+import HomePage from "./pages/home";
+import Service from "./pages/service";
 import NotFounPage from "./pages/notfoundpage";
 import Navbar from "./components/fragments/navbar/Navbar";
-import Dashboard from "./pages/admin/dashboard";
-import Login from "./pages/auth/login";
-import AdminRoutes from "./routes/AdminRoutes";
-import Profile from "./pages/admin/profile";
+import Login from "./pages/login";
+
 
 function App() {
   const location = useLocation();
@@ -26,12 +24,6 @@ function App() {
         <Route path="/service" element={<Service />} />
         <Route path="*" element={<NotFounPage />} />
         <Route path="/login" element={<Login />} />
-
-        {/* Rute Admin */}
-        <Route element={<AdminRoutes />}>
-          <Route path="/admin" element={<Dashboard />} />
-          <Route path="/admin/profile" element={<Profile />} />
-        </Route>
       </Routes>
     </>
   );
