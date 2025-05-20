@@ -33,7 +33,7 @@ function MobileNavbar() {
   const [showMobileMenu, setShowMobileMenu] = useState(false);
 
   return (
-    <div className="flex md:hidden">
+    <div className="flex lg:hidden">
       <button onClick={handleThemeChange}>
         {theme === "dark" && (
           <h1>
