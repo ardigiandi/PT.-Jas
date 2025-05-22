@@ -4,6 +4,7 @@ import Service from "./pages/service";
 import NotFounPage from "./pages/notfoundpage";
 import Navbar from "./components/fragments/navbar/Navbar";
 import Login from "./pages/login";
+import Portofolio from "./pages/portofolio";
 
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/service" element={<Service />} />
+        <Route path="/portofolio" element={<Portofolio />} />
         <Route path="*" element={<NotFounPage />} />
         <Route path="/login" element={<Login />} />
       </Routes>
