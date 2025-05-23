@@ -16,7 +16,7 @@ function DesktopNavbar() {
     { name: "Home", path: "/" },
     { name: "Service", path: "/service" },
     { name: "Feature", path: "/feature" },
-    { name: "Testimonial", path: "/testimonial" },
+    { name: "Portofolio", path: "/portofolio" },
     { name: "FAQ", path: "/faq" },
   ];
 

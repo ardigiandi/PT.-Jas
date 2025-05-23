@@ -15,6 +15,8 @@ import AdminPhotoPage from "./pages/admin/PhotoPage"; // Import AdminPhotoPage
 import PrivateRoute from "./components/PrivateRoute"; // Import PrivateRoute
 // import PortfolioCreate from "./components/fragments/admin/PortfolioCreate"; // No longer needed as creation is in a modal
 // import PortfolioEdit from "./components/fragments/admin/PortfolioEdit"; // No longer needed as editing is in a modal
+=======
+import Portofolio from "./pages/portofolio";
 
 function App() {
   const location = useLocation();
@@ -32,6 +34,7 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/service" element={<Service />} />
+        <Route path="/portofolio" element={<Portofolio />} />
         <Route path="*" element={<NotFounPage />} />
         <Route path="/login" element={<Login />} />
         {/* Protected Admin Routes */}

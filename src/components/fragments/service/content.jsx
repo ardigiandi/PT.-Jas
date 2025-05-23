@@ -5,7 +5,7 @@ const cardList = [
     id: 1,
     title: "Search engine",
     subtitle: "Optimization",
-    textColor: 'bg-[#F58220]',
+    textColor: 'text-black',
     description: "Learn more",
     desc_image: "/assets/arrow.svg",
     image: "/assets/service1.svg",
@@ -15,7 +15,7 @@ const cardList = [
     id: 2,
     title: "Search engine",
     subtitle: "Optimization",
-    textColor: 'bg-[#FFFFFF] dark:text-black',
+    textColor: 'text-white',
     description: "Learn more",
     desc_image: "/assets/arrow.svg",
     image: "/assets/service1.svg",
@@ -25,7 +25,7 @@ const cardList = [
     id: 3,
     title: "Search engine",
     subtitle: "Optimization",
-    textColor: 'bg-[#FFFFFF] dark:text-black',
+    textColor: 'text-white',
     description: "Learn more",
     desc_image: "/assets/arrow.svg",
     image: "/assets/service1.svg",
@@ -35,7 +35,7 @@ const cardList = [
     id: 4,
     title: "Search engine",
     subtitle: "Optimization",
-    textColor: 'bg-[#F58220]',
+    // textColor: 'bg-[#F58220]',
     description: "Learn more",
     desc_image: "/assets/arrow.svg",
     image: "/assets/service1.svg",
@@ -46,13 +46,13 @@ const cardList = [
 function ContentPage() {
   return (
     <div className="max-w-6xl mx-auto my-[120px] flex flex-col gap-[85px] px-5 lg:px-0">
-      <div className="flex flex-col lg:flex-row items-center gap-6 lg:gap-10">
-        <h1 className="text-3xl font-medium bg-oren w-fit px-2 py-1">
+      <div className="flex flex-col lg:flex-row items-center gap-6 lg:gap-10 px-5">
+        <h1 className="text-3xl font-medium  w-fit px-2 py-1">
           Services
         </h1>
         <p className="text-base w-full lg:w-[580px] font-normal text-center lg:text-left">
           At our digital marketing agency, we offer a range of services to help
-          businesses grow and succeed online. These services include:
+          businesses grow and succeed online. These services include
         </p>
       </div>
 
@@ -73,7 +73,7 @@ function ContentPage() {
               </div>
               <div className="flex gap-4 items-center">
                 <img src={card.desc_image} alt="" />
-                <h1 className="text-lg font-medium">{card.description}</h1>
+                <h1 className={`text-lg font-medium ${card.textColor} `}>{card.description}</h1>
               </div>
             </div>
             <img src={card.image} alt="" />

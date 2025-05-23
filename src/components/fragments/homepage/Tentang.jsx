@@ -10,8 +10,8 @@ function TentangKami() {
         className="lg:w-[441px] w-full rounded-md border border-black shadow-image"
       />
       <div className="flex flex-col gap-4 w-full lg:w-[601px] items-start">
-        <h1 className="text-[28px] font-semibold bg-oren w-fit left-4 lg:left-0 px-4 py-2 relative">
-          <span className="absolute inset-0 -z-10 bg-oren skew-x-[-10deg] transform scale-110"></span>
+        <h1 className="text-[28px] font-semibold w-fit left-4 lg:left-0 py-2 relative">
+          {/* <span className="absolute inset-0 -z-10 bg-oren skew-x-[-10deg] transform scale-110"></span> */}
           Tentang Kami
         </h1>
         <p className="text-sm lg:text-base text-gray-500">
