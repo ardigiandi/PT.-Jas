@@ -1,31 +1,55 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 const PhotoCreate = () => {
-  const [title, setTitle] = useState("");
-  const [imageUrl, setImageUrl] = useState(""); // Assuming image is handled via URL for now
+  const [portfolioId, setPortfolioId] = useState("");
+  const [photoFile, setPhotoFile] = useState(null);
+  const [portfolios, setPortfolios] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchPortfolios = async () => {
+      try {
+        const token = localStorage.getItem("authToken");
+        const response = await axios.get(
+          "http://127.0.0.1:8000/api/portfolios",
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        setPortfolios(response.data);
+      } catch (err) {
+        console.error("Failed to fetch portfolios:", err);
+        // Handle error fetching portfolios, maybe set an error state or show a message
+      }
+    };
+
+    fetchPortfolios();
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
     setError(null);
 
+    const formData = new FormData();
+    formData.append("portfolio_id", portfolioId);
+    formData.append("photo_path", photoFile); // Use 'photo_path' as per fillable
+
     try {
       const token = localStorage.getItem("authToken");
       const response = await axios.post(
         "http://127.0.0.1:8000/api/photos",
-        {
-          title,
-          url: imageUrl, // Assuming the backend expects 'url' for the image
-        },
+        formData, // Send formData
         {
           headers: {
             Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json", // Adjust if using form-data for file upload
+            "Content-Type": "multipart/form-data", // Important for file uploads
           },
         }
       );
@@ -48,40 +72,44 @@ const PhotoCreate = () => {
         className="bg-white p-6 rounded-lg shadow-md"
       >
         <div className="mb-4">
-          <label htmlFor="title" className="block text-gray-700 font-bold mb-2">
-            Title
-          </label>
-          <input
-            type="text"
-            id="title"
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            required
-          />
-        </div>
-        <div className="mb-4">
           <label
-            htmlFor="imageUrl"
+            htmlFor="portfolio"
             className="block text-gray-700 font-bold mb-2"
           >
-            Image URL
+            Portfolio
+          </label>
+          <select
+            id="portfolio"
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            value={portfolioId}
+            onChange={(e) => setPortfolioId(e.target.value)}
+            required
+          >
+            <option value="">Select a Portfolio</option>
+            {portfolios.map((portfolio) => (
+              <option key={portfolio.id} value={portfolio.id}>
+                {portfolio.title} {/* Assuming portfolio has a 'title' field */}
+              </option>
+            ))}
+          </select>
+        </div>
+        <div className="mb-4">
+          <label htmlFor="photo" className="block text-gray-700 font-bold mb-2">
+            Photo File
           </label>
           <input
-            type="text" // Change to type="file" for file upload
-            id="imageUrl"
+            type="file"
+            id="photo"
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            value={imageUrl} // Remove value and onChange for file input
-            onChange={(e) => setImageUrl(e.target.value)} // Adjust for file input
+            onChange={(e) => setPhotoFile(e.target.files[0])}
             required
           />
-          {/* Add file input handling here if needed */}
         </div>
         <div className="flex items-center justify-between">
           <button
             type="submit"
             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-            disabled={loading}
+            disabled={loading || !portfolioId || !photoFile}
           >
             {loading ? "Creating..." : "Create Photo"}
           </button>

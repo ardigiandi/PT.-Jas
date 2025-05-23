@@ -1,50 +1,67 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
-import PortfolioCreateModal from "./PortfolioCreateModal"; // Import the create modal component
-import PortfolioEditModal from "./PortfolioEditModal"; // Import the edit modal component
+import PortfolioCreateModal from "./PortfolioCreateModal";
+import PortfolioEditModal from "./PortfolioEditModal";
+import DeleteConfirmationModal from "../../common/DeleteConfirmationModal";
 
 const PortfolioList = () => {
   const [portfolios, setPortfolios] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [lastPage, setLastPage] = useState(1);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [isCreateModalOpen, setIsCreateModalOpen] = useState(false); // State to control create modal visibility
-  const [isEditModalOpen, setIsEditModalOpen] = useState(false); // State to control edit modal visibility
-  const [selectedPortfolio, setSelectedPortfolio] = useState(null); // State to hold the portfolio being edited
+  const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [selectedPortfolio, setSelectedPortfolio] = useState(null);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [portfolioToDeleteId, setPortfolioToDeleteId] = useState(null);
+
+  const fetchPortfolios = useCallback(async (page = 1) => {
+    try {
+      setLoading(true);
+      const token = localStorage.getItem("authToken");
+      const response = await axios.get(
+        `http://127.0.0.1:8000/api/portofolios?page=${page}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      setPortfolios(response.data.data);
+      setCurrentPage(response.data.current_page);
+      setLastPage(response.data.last_page);
+    } catch (err) {
+      setError(err);
+    } finally {
+      setLoading(false);
+    }
+  }, []);
 
   useEffect(() => {
-    const fetchPortfolios = async () => {
+    fetchPortfolios(currentPage);
+  }, [fetchPortfolios, currentPage]);
+
+  const handleDeleteClick = (id) => {
+    setPortfolioToDeleteId(id);
+    setIsDeleteModalOpen(true);
+  };
+
+  const handleConfirmDelete = async () => {
+    setIsDeleteModalOpen(false);
+    if (portfolioToDeleteId) {
       try {
         const token = localStorage.getItem("authToken");
-        const response = await axios.get(
-          "http://127.0.0.1:8000/api/portofolios",
+        await axios.delete(
+          `http://127.0.0.1:8000/api/portofolios/${portfolioToDeleteId}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
             },
           }
         );
-        setPortfolios(response.data);
-      } catch (err) {
-        setError(err);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchPortfolios();
-  }, []);
-
-  const handleDelete = async (id) => {
-    if (window.confirm("Are you sure you want to delete this portfolio?")) {
-      try {
-        const token = localStorage.getItem("authToken");
-        await axios.delete(`http://127.0.0.1:8000/api/portofolios/${id}`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-        setPortfolios(portfolios.filter((portfolio) => portfolio.id !== id));
+        fetchPortfolios(currentPage); // Refresh current page
+        setPortfolioToDeleteId(null);
       } catch (err) {
         console.error("Failed to delete portfolio:", err);
         alert("Failed to delete portfolio.");
@@ -52,21 +69,28 @@ const PortfolioList = () => {
     }
   };
 
-  const handlePortfolioCreated = (newPortfolio) => {
-    setPortfolios([...portfolios, newPortfolio]);
+  const handleCancelDelete = () => {
+    setIsDeleteModalOpen(false);
+    setPortfolioToDeleteId(null);
   };
 
-  const handlePortfolioUpdated = (updatedPortfolio) => {
-    setPortfolios(
-      portfolios.map((portfolio) =>
-        portfolio.id === updatedPortfolio.id ? updatedPortfolio : portfolio
-      )
-    );
+  const handlePortfolioCreated = () => {
+    fetchPortfolios(currentPage);
+  };
+
+  const handlePortfolioUpdated = () => {
+    fetchPortfolios(currentPage);
   };
 
   const openEditModal = (portfolio) => {
     setSelectedPortfolio(portfolio);
     setIsEditModalOpen(true);
+  };
+
+  const handlePageChange = (newPage) => {
+    if (newPage >= 1 && newPage <= lastPage) {
+      setCurrentPage(newPage);
+    }
   };
 
   if (loading) return <div>Loading...</div>;
@@ -77,7 +101,7 @@ const PortfolioList = () => {
       <h2 className="text-2xl font-bold mb-4">Portfolio List</h2>
       <div className="flex justify-end mb-4">
         <button
-          onClick={() => setIsCreateModalOpen(true)} // Open create modal
+          onClick={() => setIsCreateModalOpen(true)}
           className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 transition"
         >
           Add New Portfolio
@@ -102,7 +126,7 @@ const PortfolioList = () => {
                 className="border-b border-gray-200 hover:bg-gray-100"
               >
                 <td className="py-3 px-6 text-left whitespace-nowrap">
-                  {index + 1}
+                  {(currentPage - 1) * 10 + index + 1}
                 </td>
                 <td className="py-3 px-6 text-left">{portfolio.title}</td>
                 <td className="py-3 px-6 text-left">{portfolio.description}</td>
@@ -111,13 +135,13 @@ const PortfolioList = () => {
                 <td className="py-3 px-6 text-center">
                   <div className="flex items-center justify-center space-x-2">
                     <button
-                      onClick={() => openEditModal(portfolio)} // Open edit modal
+                      onClick={() => openEditModal(portfolio)}
                       className="text-blue-600 hover:text-blue-900"
                     >
                       Edit
                     </button>
                     <button
-                      onClick={() => handleDelete(portfolio.id)}
+                      onClick={() => handleDeleteClick(portfolio.id)}
                       className="text-red-600 hover:text-red-900"
                     >
                       Delete
@@ -129,18 +153,44 @@ const PortfolioList = () => {
           </tbody>
         </table>
       </div>
-      {/* Render the create modal */}
+
+      {/* Pagination */}
+      <div className="flex justify-center mt-4 space-x-2">
+        <button
+          onClick={() => handlePageChange(currentPage - 1)}
+          disabled={currentPage === 1}
+          className="px-4 py-2 bg-gray-200 rounded hover:bg-gray-300 disabled:opacity-50"
+        >
+          Prev
+        </button>
+        <span className="px-4 py-2">
+          {currentPage} / {lastPage}
+        </span>
+        <button
+          onClick={() => handlePageChange(currentPage + 1)}
+          disabled={currentPage === lastPage}
+          className="px-4 py-2 bg-gray-200 rounded hover:bg-gray-300 disabled:opacity-50"
+        >
+          Next
+        </button>
+      </div>
+
       <PortfolioCreateModal
         isOpen={isCreateModalOpen}
         onClose={() => setIsCreateModalOpen(false)}
         onPortfolioCreated={handlePortfolioCreated}
       />
-      {/* Render the edit modal */}
       <PortfolioEditModal
         isOpen={isEditModalOpen}
         onClose={() => setIsEditModalOpen(false)}
         portfolio={selectedPortfolio}
         onPortfolioUpdated={handlePortfolioUpdated}
+      />
+      <DeleteConfirmationModal
+        isOpen={isDeleteModalOpen}
+        onClose={handleCancelDelete}
+        onConfirm={handleConfirmDelete}
+        itemName="portfolio"
       />
     </div>
   );

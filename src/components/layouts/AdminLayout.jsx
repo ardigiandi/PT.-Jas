@@ -1,24 +1,60 @@
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import { Link } from "react-router-dom";
 import {
   LucideHome,
-  LucideSettings,
   LucideBarChart2,
-  LucideUser,
   LucideLogIn,
+  LucideImage,
 } from "lucide-react";
-import { Link } from "react-router";
+import DeleteConfirmationModal from "../common/DeleteConfirmationModal";
 
 const AdminLayout = ({ children }) => {
+  const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
+
+  const handleLogout = async () => {
+    setIsLogoutModalOpen(false);
+    try {
+      const token = localStorage.getItem("authToken");
+      if (token) {
+        await axios.post("http://127.0.0.1:8000/api/logout", null, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+      }
+    } catch (error) {
+      console.error("Logout API call failed:", error);
+    } finally {
+      localStorage.removeItem("authToken");
+      window.location.href = "/login";
+    }
+  };
+
+  const handleOpenLogoutModal = () => setIsLogoutModalOpen(true);
+  const handleCloseLogoutModal = () => setIsLogoutModalOpen(false);
+
+  // Disable scroll when modal is open
+  useEffect(() => {
+    if (isLogoutModalOpen) {
+      document.body.classList.add("overflow-hidden");
+    } else {
+      document.body.classList.remove("overflow-hidden");
+    }
+
+    return () => {
+      document.body.classList.remove("overflow-hidden");
+    };
+  }, [isLogoutModalOpen]);
+
   return (
-    <div className="min-h-screen bg-gray-100 p-4">
-      <div className="flex gap-4">
+    <div className="h-screen overflow-hidden bg-gray-100">
+      <div className="flex h-full">
         {/* Sidebar */}
-        <aside className="w-[250px] bg-white rounded-2xl shadow h-screen p-4 text-gray-800">
-          <div className="space-y-4">
-            <div className="text-2xl font-bold mb-4">Dashboard</div>{" "}
-            {/* Added mb-4 for space below title */}
-            <nav className="space-y-2">
-              {" "}
-              {/* Changed space-y back to 2 for spacing between nav items */}
+        <aside className="w-[250px] h-full bg-white rounded-2xl shadow p-4 text-gray-800 flex flex-col">
+          <div className="flex-1 overflow-y-auto space-y-4">
+            <div className="text-2xl font-bold mb-4">Dashboard</div>
+            <nav className="flex flex-col gap-4">
               <Link
                 to="/admin/dashboard"
                 className="flex items-center space-x-2 p-2 w-full text-left rounded-lg hover:bg-gray-200"
@@ -27,31 +63,26 @@ const AdminLayout = ({ children }) => {
                 <span>Home</span>
               </Link>
               <Link
-                to="/admin/portfolios" // Assuming this is the route for portfolio list
+                to="/admin/portfolios"
                 className="flex items-center space-x-2 p-2 w-full text-left rounded-lg hover:bg-gray-200"
               >
-                <LucideBarChart2 className="w-5 h-5" />{" "}
-                {/* Using BarChart2 for Portfolio for now */}
+                <LucideBarChart2 className="w-5 h-5" />
                 <span>Portfolio</span>
               </Link>
               <Link
-                to="/admin/photos" // Assuming this is the route for photo list
+                to="/admin/photos"
                 className="flex items-center space-x-2 p-2 w-full text-left rounded-lg hover:bg-gray-200"
               >
-                <LucideUser className="w-5 h-5" />{" "}
-                {/* Using User for Foto for now */}
+                <LucideImage className="w-5 h-5" />
                 <span>Foto</span>
               </Link>
+              {/* Tambahin item sebanyak apapun di sini, bakal scroll di dalam */}
             </nav>
           </div>
-          <div className="mt-auto">
-            {" "}
-            {/* Use mt-auto to push to the bottom */}
+
+          <div className="pt-4 border-t mt-4">
             <button
-              onClick={() => {
-                localStorage.removeItem("authToken");
-                window.location.href = "/login"; // Redirect to login page
-              }}
+              onClick={handleOpenLogoutModal}
               className="flex items-center space-x-2 p-2 w-full text-left rounded-lg text-red-600 hover:bg-red-100"
             >
               <LucideLogIn className="w-5 h-5" />
@@ -59,9 +90,20 @@ const AdminLayout = ({ children }) => {
             </button>
           </div>
         </aside>
-
-        <main className="flex-1 p-4 text-gray-800">{children}</main>
+        <main className="flex-1 p-4 text-gray-800 overflow-auto">
+          {children}
+        </main>
       </div>
+
+      <DeleteConfirmationModal
+        isOpen={isLogoutModalOpen}
+        onClose={handleCloseLogoutModal}
+        onConfirm={handleLogout}
+        title="Confirm Logout" // Set custom title
+        message="Are you sure you want to log out?" // Set custom message
+        confirmButtonText="Logout" // Set custom confirm button text
+        confirmButtonClassName="bg-red-600 hover:bg-red-700" // Optional: customize button color if needed
+      />
     </div>
   );
 };

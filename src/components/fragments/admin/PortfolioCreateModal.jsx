@@ -48,7 +48,9 @@ const PortfolioCreateModal = ({ isOpen, onClose, onPortfolioCreated }) => {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full flex justify-center items-center">
+    <div className="fixed inset-0 bg-white/20 backdrop-blur-sm flex items-center justify-center z-50">
+      {" "}
+      {/* Changed background to gray with opacity and removed blur */}
       <div className="bg-white p-8 rounded-lg shadow-xl max-w-md w-full">
         <h2 className="text-2xl font-bold mb-4 text-gray-800">
           Create New Portfolio

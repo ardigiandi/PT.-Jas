@@ -4,18 +4,23 @@ import { useNavigate, useParams } from "react-router-dom";
 
 const PhotoEdit = () => {
   const { id } = useParams();
+  const [portfolioId, setPortfolioId] = useState("");
+  const [photoFile, setPhotoFile] = useState(null);
+  const [portfolios, setPortfolios] = useState([]);
   const [title, setTitle] = useState("");
-  const [imageUrl, setImageUrl] = useState(""); // Assuming image is handled via URL for now
+  const [imageUrl, setImageUrl] = useState(""); // To display current image
   const [loading, setLoading] = useState(true);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
-    const fetchPhoto = async () => {
+    const fetchData = async () => {
       try {
         const token = localStorage.getItem("authToken");
-        const response = await axios.get(
+
+        // Fetch photo data
+        const photoResponse = await axios.get(
           `http://127.0.0.1:8000/api/photos/${id}`,
           {
             headers: {
@@ -23,17 +28,29 @@ const PhotoEdit = () => {
             },
           }
         );
-        setTitle(response.data.title);
-        setImageUrl(response.data.url); // Assuming 'url' is the field for the photo image URL
+        setTitle(photoResponse.data.title);
+        setImageUrl(photoResponse.data.photo_path); // Assuming 'photo_path' is the field for the photo image URL
+        setPortfolioId(photoResponse.data.portfolio_id); // Set initial portfolio ID
+
+        // Fetch portfolios
+        const portfoliosResponse = await axios.get(
+          "http://127.0.0.1:8000/api/portofolios", // Corrected endpoint
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        setPortfolios(portfoliosResponse.data);
       } catch (err) {
-        console.error("Failed to fetch photo:", err);
+        console.error("Failed to fetch data:", err);
         setError(err);
       } finally {
         setLoading(false);
       }
     };
 
-    fetchPhoto();
+    fetchData();
   }, [id]);
 
   const handleSubmit = async (e) => {
@@ -41,18 +58,23 @@ const PhotoEdit = () => {
     setSubmitting(true);
     setError(null);
 
+    const formData = new FormData();
+    formData.append("_method", "PUT"); // Method spoofing for PUT with form-data
+    formData.append("portfolio_id", portfolioId);
+    if (photoFile) {
+      formData.append("photo_path", photoFile); // Only append if a new file is selected
+    }
+    formData.append("title", title); // Include title in update
+
     try {
       const token = localStorage.getItem("authToken");
-      const response = await axios.put(
+      const response = await axios.post(
         `http://127.0.0.1:8000/api/photos/${id}`,
-        {
-          title,
-          url: imageUrl, // Assuming the backend expects 'url' for the image
-        },
+        formData, // Send formData
         {
           headers: {
             Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json", // Adjust if using form-data for file upload
+            "Content-Type": "multipart/form-data", // Important for file uploads
           },
         }
       );
@@ -78,6 +100,28 @@ const PhotoEdit = () => {
         className="bg-white p-6 rounded-lg shadow-md"
       >
         <div className="mb-4">
+          <label
+            htmlFor="portfolio"
+            className="block text-gray-700 font-bold mb-2"
+          >
+            Portfolio
+          </label>
+          <select
+            id="portfolio"
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            value={portfolioId}
+            onChange={(e) => setPortfolioId(e.target.value)}
+            required
+          >
+            <option value="">Select a Portfolio</option>
+            {portfolios.map((portfolio) => (
+              <option key={portfolio.id} value={portfolio.id}>
+                {portfolio.title} {/* Assuming portfolio has a 'title' field */}
+              </option>
+            ))}
+          </select>
+        </div>
+        <div className="mb-4">
           <label htmlFor="title" className="block text-gray-700 font-bold mb-2">
             Title
           </label>
@@ -91,27 +135,35 @@ const PhotoEdit = () => {
           />
         </div>
         <div className="mb-4">
-          <label
-            htmlFor="imageUrl"
-            className="block text-gray-700 font-bold mb-2"
-          >
-            Image URL
+          <label htmlFor="photo" className="block text-gray-700 font-bold mb-2">
+            Photo File
           </label>
           <input
-            type="text" // Change to type="file" for file upload
-            id="imageUrl"
+            type="file"
+            id="photo"
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            value={imageUrl} // Remove value and onChange for file input
-            onChange={(e) => setImageUrl(e.target.value)} // Adjust for file input
-            required
+            onChange={(e) => setPhotoFile(e.target.files[0])}
+            // required // Make required false as photo update is optional
           />
-          {/* Add file input handling here if needed */}
+          {/* Display current photo */}
+          {imageUrl && (
+            <div className="mt-2">
+              <label className="block text-gray-700 font-bold mb-2">
+                Current Photo
+              </label>
+              <img
+                src={imageUrl}
+                alt="Current Photo"
+                className="w-32 h-32 object-cover rounded"
+              />
+            </div>
+          )}
         </div>
         <div className="flex items-center justify-between">
           <button
             type="submit"
             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-            disabled={submitting}
+            disabled={submitting || !portfolioId} // Disable if no portfolio selected
           >
             {submitting ? "Updating..." : "Update Photo"}
           </button>

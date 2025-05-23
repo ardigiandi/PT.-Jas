@@ -7,8 +7,8 @@ import Login from "./pages/login";
 import AdminDashboard from "./pages/admin/dashboard";
 import PortfolioList from "./components/fragments/admin/PortfolioList";
 import PhotoList from "./components/fragments/admin/photos/PhotoList"; // Import PhotoList
-import PhotoCreate from "./components/fragments/admin/photos/PhotoCreate"; // Import PhotoCreate
-import PhotoEdit from "./components/fragments/admin/photos/PhotoEdit"; // Import PhotoEdit
+// import PhotoCreate from "./components/fragments/admin/photos/PhotoCreate"; // Remove PhotoCreate import
+// import PhotoEdit from "./components/fragments/admin/photos/PhotoEdit"; // Remove PhotoEdit import
 import AdminHomePage from "./pages/admin/HomePage"; // Import AdminHomePage
 import AdminPortfolioPage from "./pages/admin/PortfolioPage"; // Import AdminPortfolioPage
 import AdminPhotoPage from "./pages/admin/PhotoPage"; // Import AdminPhotoPage
@@ -37,7 +37,9 @@ function App() {
         {/* Protected Admin Routes */}
         <Route path="/admin" element={<PrivateRoute />}>
           <Route index element={<AdminHomePage />} />{" "}
-          {/* Use index route for dashboard */}
+          {/* Use index route for admin home */}
+          <Route path="dashboard" element={<AdminDashboard />} />{" "}
+          {/* Add route for /admin/dashboard */}
           <Route path="portfolios" element={<AdminPortfolioPage />} />{" "}
           {/* Use AdminPortfolioPage */}
           {/* <Route path="portfolios/create" element={<PortfolioCreate />} /> */}{" "}
@@ -47,8 +49,10 @@ function App() {
           {/* Photo Routes */}
           <Route path="photos" element={<AdminPhotoPage />} />{" "}
           {/* Use AdminPhotoPage */}
-          <Route path="photos/create" element={<PhotoCreate />} />
-          <Route path="photos/edit/:id" element={<PhotoEdit />} />
+          {/* <Route path="photos/create" element={<PhotoCreate />} /> */}{" "}
+          {/* Remove create route */}
+          {/* <Route path="photos/edit/:id" element={<PhotoEdit />} /> */}{" "}
+          {/* Remove edit route */}
         </Route>
       </Routes>
     </>

@@ -5,10 +5,8 @@ import AdminHomePage from "./HomePage"; // Import AdminHomePage
 
 const AdminDashboard = () => {
   return (
-    <AdminLayout>
-      {/* Render AdminHomePage content */}
-      <AdminHomePage />
-    </AdminLayout>
+    // Render AdminHomePage content directly, AdminLayout is provided by the router
+    <AdminHomePage />
   );
 };
 
