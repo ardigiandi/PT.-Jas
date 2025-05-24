@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+import axiosInstance from "@/api/axiosInstance";
 
 const PhotoCreateModal = ({ isOpen, onClose, onSuccess }) => {
   const [portfolioId, setPortfolioId] = useState("");
@@ -14,8 +14,8 @@ const PhotoCreateModal = ({ isOpen, onClose, onSuccess }) => {
     const fetchPortfolios = async () => {
       try {
         const token = localStorage.getItem("authToken");
-        const response = await axios.get(
-          "http://127.0.0.1:8000/api/portofolios", // Corrected endpoint
+        const response = await axiosInstance.get(
+          "/api/portofolios", // Corrected endpoint
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -44,16 +44,12 @@ const PhotoCreateModal = ({ isOpen, onClose, onSuccess }) => {
 
     try {
       const token = localStorage.getItem("authToken");
-      const response = await axios.post(
-        "http://127.0.0.1:8000/api/photos",
-        formData,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
+      const response = await axiosInstance.post("/api/photos", formData, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "multipart/form-data",
+        },
+      });
       console.log("Photo created:", response.data);
       // Reset form and close modal on success
       setPortfolioId("");

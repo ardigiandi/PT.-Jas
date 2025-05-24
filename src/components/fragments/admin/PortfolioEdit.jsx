@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
+import axiosInstance from "@/api/axiosInstance";
 
 const PortfolioEdit = () => {
   const { id } = useParams();
@@ -17,8 +18,8 @@ const PortfolioEdit = () => {
     const fetchPortfolio = async () => {
       try {
         const token = localStorage.getItem("authToken");
-        const response = await axios.get(
-          `http://127.0.0.1:8000/api/portofolios/${id}`,
+        const response = await axiosInstance.get(
+          `/api/portofolios/${id}`,
           {
             // Use full API URL
             headers: {

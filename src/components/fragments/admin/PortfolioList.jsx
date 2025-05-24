@@ -3,6 +3,7 @@ import axios from "axios";
 import PortfolioCreateModal from "./PortfolioCreateModal";
 import PortfolioEditModal from "./PortfolioEditModal";
 import DeleteConfirmationModal from "../../common/DeleteConfirmationModal";
+import axiosInstance from "@/api/axiosInstance";
 
 const PortfolioList = () => {
   const [portfolios, setPortfolios] = useState([]);
@@ -20,8 +21,8 @@ const PortfolioList = () => {
     try {
       setLoading(true);
       const token = localStorage.getItem("authToken");
-      const response = await axios.get(
-        `http://127.0.0.1:8000/api/portofolios?page=${page}`,
+      const response = await axiosInstance.get(
+        `/api/portofolios?page=${page}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -52,8 +53,8 @@ const PortfolioList = () => {
     if (portfolioToDeleteId) {
       try {
         const token = localStorage.getItem("authToken");
-        await axios.delete(
-          `http://127.0.0.1:8000/api/portofolios/${portfolioToDeleteId}`,
+        await axiosInstance.delete(
+          `/api/portofolios/${portfolioToDeleteId}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import axiosInstance from "@/api/axiosInstance";
 
 const PhotoCreate = () => {
   const [portfolioId, setPortfolioId] = useState("");
@@ -14,14 +14,11 @@ const PhotoCreate = () => {
     const fetchPortfolios = async () => {
       try {
         const token = localStorage.getItem("authToken");
-        const response = await axios.get(
-          "http://127.0.0.1:8000/api/portfolios",
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
+        const response = await axiosInstance.get("/api/portfolios", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
         setPortfolios(response.data);
       } catch (err) {
         console.error("Failed to fetch portfolios:", err);
@@ -43,8 +40,8 @@ const PhotoCreate = () => {
 
     try {
       const token = localStorage.getItem("authToken");
-      const response = await axios.post(
-        "http://127.0.0.1:8000/api/photos",
+      const response = await axiosInstance.post(
+        "/api/photos",
         formData, // Send formData
         {
           headers: {

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
+import axiosInstance from "@/api/axiosInstance";
 
 const PhotoEdit = () => {
   const { id } = useParams();
@@ -20,8 +20,8 @@ const PhotoEdit = () => {
         const token = localStorage.getItem("authToken");
 
         // Fetch photo data
-        const photoResponse = await axios.get(
-          `http://127.0.0.1:8000/api/photos/${id}`,
+        const photoResponse = await axiosInstance.get(
+          `/api/photos/${id}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -33,8 +33,8 @@ const PhotoEdit = () => {
         setPortfolioId(photoResponse.data.portfolio_id); // Set initial portfolio ID
 
         // Fetch portfolios
-        const portfoliosResponse = await axios.get(
-          "http://127.0.0.1:8000/api/portofolios", // Corrected endpoint
+        const portfoliosResponse = await axiosInstance.get(
+          "/api/portofolios", // Corrected endpoint
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -68,8 +68,8 @@ const PhotoEdit = () => {
 
     try {
       const token = localStorage.getItem("authToken");
-      const response = await axios.post(
-        `http://127.0.0.1:8000/api/photos/${id}`,
+      const response = await axiosInstance.post(
+        `/api/photos/${id}`,
         formData, // Send formData
         {
           headers: {

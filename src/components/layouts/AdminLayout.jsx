@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import { Link } from "react-router-dom";
 import {
   LucideHome,
@@ -8,6 +7,7 @@ import {
   LucideImage,
 } from "lucide-react";
 import DeleteConfirmationModal from "../common/DeleteConfirmationModal";
+import axiosInstance from "@/api/axiosInstance";
 
 const AdminLayout = ({ children }) => {
   const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
@@ -17,7 +17,7 @@ const AdminLayout = ({ children }) => {
     try {
       const token = localStorage.getItem("authToken");
       if (token) {
-        await axios.post("http://127.0.0.1:8000/api/logout", null, {
+        await axiosInstance.post("/api/logout", null, {
           headers: {
             Authorization: `Bearer ${token}`,
           },

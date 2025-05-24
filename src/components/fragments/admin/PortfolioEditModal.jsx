@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+import axiosInstance from "@/api/axiosInstance";
 
 const PortfolioEditModal = ({
   isOpen,
@@ -30,8 +30,8 @@ const PortfolioEditModal = ({
 
     try {
       const token = localStorage.getItem("authToken");
-      const response = await axios.put(
-        `http://127.0.0.1:8000/api/portofolios/${portfolio.id}`,
+      const response = await axiosInstance.put(
+        `/api/portofolios/${portfolio.id}`,
         { title, description, client_name: clientName, date },
         {
           headers: {

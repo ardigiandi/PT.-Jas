@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useCallback } from "react";
-import axios from "axios";
 import PhotoCreateModal from "./PhotoCreateModal";
 import DeleteConfirmationModal from "../../../common/DeleteConfirmationModal";
+import axiosInstance from "@/api/axiosInstance";
 
 const PhotoList = () => {
   const [photos, setPhotos] = useState([]);
@@ -18,14 +18,11 @@ const PhotoList = () => {
     try {
       setLoading(true);
       const token = localStorage.getItem("authToken");
-      const response = await axios.get(
-        `http://127.0.0.1:8000/api/photos?page=${page}`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const response = await axiosInstance.get(`/api/photos?page=${page}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       setPhotos(response.data.data); // asumsi struktur Laravel Resource Collection
       setTotalPages(response.data.last_page);
       setCurrentPage(response.data.current_page);
@@ -50,14 +47,11 @@ const PhotoList = () => {
     if (photoToDeleteId) {
       try {
         const token = localStorage.getItem("authToken");
-        await axios.delete(
-          `http://127.0.0.1:8000/api/photos/${photoToDeleteId}`,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
+        await axiosInstance.delete(`/api/photos/${photoToDeleteId}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
         fetchPhotos(currentPage);
         setPhotoToDeleteId(null);
       } catch (err) {

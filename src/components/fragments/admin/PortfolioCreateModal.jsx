@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import axiosInstance from "@/api/axiosInstance";
 
 const PortfolioCreateModal = ({ isOpen, onClose, onPortfolioCreated }) => {
   const [title, setTitle] = useState("");
@@ -16,8 +17,8 @@ const PortfolioCreateModal = ({ isOpen, onClose, onPortfolioCreated }) => {
 
     try {
       const token = localStorage.getItem("authToken");
-      const response = await axios.post(
-        "http://127.0.0.1:8000/api/portofolios",
+      const response = await axiosInstance.post(
+        "/api/portofolios",
         { title, description, client_name: clientName, date },
         {
           headers: {

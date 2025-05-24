@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import axiosInstance from "@/api/axiosInstance";
 
 const PortfolioCreate = () => {
   const [title, setTitle] = useState("");
@@ -18,8 +18,8 @@ const PortfolioCreate = () => {
 
     try {
       const token = localStorage.getItem("authToken");
-      await axios.post(
-        "http://127.0.0.1:8000/api/portofolios", // Use full API URL
+      await axiosInstance.post(
+        "/api/portofolios", // Use full API URL
         { title, description, client_name: clientName, date }, // Include new fields
         {
           headers: {
