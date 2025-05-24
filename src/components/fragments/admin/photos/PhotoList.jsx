@@ -72,8 +72,14 @@ const PhotoList = () => {
     setPhotoToDeleteId(null);
   };
 
-  const handleOpenCreateModal = () => setIsCreateModalOpen(true);
-  const handleCloseCreateModal = () => setIsCreateModalOpen(false);
+  const handleOpenCreateModal = () => {
+    console.log("Opening create modal");
+    setIsCreateModalOpen(true);
+  };
+  const handleCloseCreateModal = () => {
+    console.log("Closing create modal");
+    setIsCreateModalOpen(false);
+  };
   const handlePhotoCreated = () => fetchPhotos(currentPage);
 
   const handlePageChange = (page) => {

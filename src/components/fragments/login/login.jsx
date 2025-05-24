@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -8,6 +8,13 @@ const LoginPage = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null); // Add state for error handling
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const authToken = localStorage.getItem("authToken");
+    if (authToken) {
+      navigate("/admin/dashboard");
+    }
+  }, [navigate]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();

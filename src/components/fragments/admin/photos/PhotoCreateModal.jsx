@@ -22,7 +22,8 @@ const PhotoCreateModal = ({ isOpen, onClose, onSuccess }) => {
             },
           }
         );
-        setPortfolios(response.data);
+        console.log("Portfolios fetched successfully:", response.data);
+        setPortfolios(response.data.data);
       } catch (err) {
         console.error("Failed to fetch portfolios:", err);
         setError("Failed to load portfolios. Please try again."); // Set a user-friendly error message
