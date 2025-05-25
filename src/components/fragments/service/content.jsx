@@ -60,7 +60,7 @@ function ContentPage() {
         {cardList.map((card, index) => (
           <div
             key={index}
-            className={`flex flex-col lg:flex-row gap-12 p-[50px] rounded-4xl border border-black shadow-service ${card.bgColor}`}
+            className={`flex flex-col lg:flex-row gap-12 p-[50px] rounded-4xl border border-black ${card.bgColor}`}
           >
             <div className="flex flex-col justify-between gap-6 lg:gap-0">
               <div>

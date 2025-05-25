@@ -2,7 +2,12 @@ import React from "react";
 
 function Footer() {
   return (
-    <div className="bg-oren flex flex-wrap justify-between items-center lg:px-20 gap-12 lg:gap-0 px-5 lg:py-16 py-8">
+    <div className="relative w-full bg-oren flex flex-wrap justify-between items-center lg:px-20 gap-12 lg:gap-0 px-5 lg:py-24 py-28">
+      {/* <img
+        src="/assets/pattern.svg"
+        alt=""
+        className="absolute top-0 lg:left-14 w-[200px] h-[100px] "
+      /> */}
       <div className="flex flex-col">
         <img src="/assets/logo-white.png" alt="" className="w-[120px]" />
         <p className="text-white text-base w-[240px]">
@@ -54,6 +59,11 @@ function Footer() {
           </ul>
         </div>
       </div>
+      {/* <img
+        src="/assets/pattern.svg"
+        alt=""
+        className="absolute bottom-0 lg:right-14 right-0 w-[200px] h-[100px] "
+      /> */}
     </div>
   );
 }

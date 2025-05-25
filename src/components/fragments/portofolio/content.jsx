@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axiosInstance from "@/api/axiosInstance";
+import Pagination from "@/components/elements/pagination"; 
 
 function CardPortofolio() {
   const [cards, setCards] = useState([]);
@@ -14,7 +15,6 @@ function CardPortofolio() {
       try {
         setLoading(true);
         const response = await axiosInstance.get("/api/portofolios");
-        // anggap response.data.data adalah array semua portofolio
         setCards(Array.isArray(response.data.data) ? response.data.data : []);
         setError(null);
       } catch (err) {
@@ -28,62 +28,16 @@ function CardPortofolio() {
     fetchPortfolios();
   }, []);
 
-  // Hitung total pages berdasarkan cards.length dan cardsPerPage
   const totalPages = Math.ceil(cards.length / cardsPerPage);
-
-  // Ambil cards untuk halaman sekarang
   const startIndex = (currentPage - 1) * cardsPerPage;
   const currentCards = cards.slice(startIndex, startIndex + cardsPerPage);
-
-  const renderPagination = () => {
-    const pages = [];
-    for (let i = 1; i <= totalPages; i++) {
-      pages.push(
-        <button
-          key={i}
-          onClick={() => setCurrentPage(i)}
-          className={`px-3 py-1 rounded ${
-            i === currentPage
-              ? "bg-orange-500 text-white font-semibold" // Warna oren untuk halaman aktif
-              : "bg-white text-black"
-          }`}
-        >
-          {i}
-        </button>
-      );
-    }
-
-    return (
-      <div className="flex justify-center items-center gap-2 mt-10">
-        <button
-          onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
-          disabled={currentPage === 1}
-          className="px-3 py-1 bg-white text-black rounded disabled:opacity-50"
-        >
-          Previous
-        </button>
-
-        {pages}
-
-        <button
-          onClick={() =>
-            setCurrentPage((prev) => Math.min(prev + 1, totalPages))
-          }
-          disabled={currentPage === totalPages}
-          className="px-3 py-1 bg-white text-black rounded disabled:opacity-50"
-        >
-          Next
-        </button>
-      </div>
-    );
-  };
 
   if (loading) return <p className="text-center text-white">Loading...</p>;
   if (error) return <p className="text-center text-red-500">{error}</p>;
 
   return (
     <div className="max-w-6xl mx-auto my-[100px] px-4">
-      <h1 className="flex justify-center text-2xl font-semibold text-white">
+      <h1 className="flex justify-center text-2xl font-semibold">
         My Latest Work
       </h1>
 
@@ -102,7 +56,6 @@ function CardPortofolio() {
               alt={card.title || "No title"}
               className="w-full h-[400px] object-cover rounded-md"
             />
-
             <div className="space-y-2">
               <span className="text-sm font-medium text-white/80">
                 {card.title}
@@ -120,7 +73,11 @@ function CardPortofolio() {
       </div>
 
       {/* Pagination */}
-      <div className="flex justify-center mt-10">{renderPagination()}</div>
+      <Pagination
+        currentPage={currentPage}
+        totalPages={totalPages}
+        onPageChange={setCurrentPage}
+      />
     </div>
   );
 }
