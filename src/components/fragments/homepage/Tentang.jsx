@@ -7,7 +7,7 @@ function TentangKami() {
       <img
         src="/assets/depan.png"
         alt=""
-        className="lg:w-[441px] w-full rounded-md border border-black"
+        className="lg:w-[441px] w-full rounded-md border border-abu"
       />
       <div className="flex flex-col gap-4 w-full lg:w-[601px] items-start">
         <h1 className="text-[28px] font-semibold w-fit left-4 lg:left-0 py-2 relative">
@@ -23,7 +23,7 @@ function TentangKami() {
           sebagai supplier peralatan dapur komersial berbagia merk dengan harga
           terjangkau guna memenuhi permintaan pasar.
         </p>
-        <Button className={"text-black rounded-xs"}>Kontak Kami</Button>
+        <Button className={"text-white rounded-xs"}>Kontak Kami</Button>
       </div>
     </div>
   );

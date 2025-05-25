@@ -40,6 +40,7 @@ function CardPortofolio() {
       <h1 className="flex justify-center text-2xl font-semibold">
         My Latest Work
       </h1>
+      <p className="flex justify-center mt-1 text-gray-500">Beberapa proyek dan karya terbaru saya.</p>
 
       <div className="flex flex-wrap justify-center mt-16 gap-5">
         {currentCards.map((card, index) => (

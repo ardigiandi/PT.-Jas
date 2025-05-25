@@ -9,7 +9,7 @@ function Pagination({ currentPage, totalPages, onPageChange }) {
       <button
         key={i}
         onClick={() => onPageChange(i)}
-        className={`px-3 py-1 rounded ${
+        className={`px-3 py-1 rounded cursor-pointer ${
           i === currentPage
             ? "bg-orange-500 text-white font-semibold"
             : "bg-white text-black"
@@ -25,7 +25,7 @@ function Pagination({ currentPage, totalPages, onPageChange }) {
       <button
         onClick={() => onPageChange(Math.max(currentPage - 1, 1))}
         disabled={currentPage === 1}
-        className="px-3 py-1 bg-white text-black rounded disabled:opacity-50"
+        className="px-3 py-1 bg-white text-black rounded disabled:opacity-50 cursor-pointer"
       >
         Previous
       </button>
@@ -35,7 +35,7 @@ function Pagination({ currentPage, totalPages, onPageChange }) {
       <button
         onClick={() => onPageChange(Math.min(currentPage + 1, totalPages))}
         disabled={currentPage === totalPages}
-        className="px-3 py-1 bg-white text-black rounded disabled:opacity-50"
+        className="px-3 py-1 bg-white text-black rounded disabled:opacity-50 cursor-pointer"
       >
         Next
       </button>

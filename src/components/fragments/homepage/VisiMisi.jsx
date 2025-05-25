@@ -29,7 +29,7 @@ function VisiMisi() {
 const CardPage = ({ title, description }) => {
   return (
     <div
-      className="flex flex-col gap-4 px-5 items-center w-full lg:w-[45%] h-full rounded-md  justify-center lg:justify-start py-5 bg-white dark:bg-abu border border-black"
+      className="flex flex-col gap-4 px-5 items-center w-full lg:w-[45%] h-full rounded-md  justify-center lg:justify-start py-5 bg-white dark:bg-abu border border-abu"
     >
       <h1 className="text-3xl font-bold text-center px-3">{title}</h1>
       <p className="text-center text-sm">{description}</p>
