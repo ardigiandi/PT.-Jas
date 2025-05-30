@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import axiosInstance from "@/api/axiosInstance";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
@@ -22,7 +23,7 @@ const LoginPage = () => {
     console.log("Attempting login with:", { email, password }); // Log data being sent
 
     try {
-      const response = await axios.post("http://127.0.0.1:8000/api/login", {
+      const response = await axiosInstance("/api/login", {
         email,
         password,
       });
