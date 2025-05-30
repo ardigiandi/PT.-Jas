@@ -23,7 +23,7 @@ const LoginPage = () => {
     console.log("Attempting login with:", { email, password }); // Log data being sent
 
     try {
-      const response = await axiosInstance("/api/login", {
+      const response = await axiosInstance.post("/api/login", {
         email,
         password,
       });
