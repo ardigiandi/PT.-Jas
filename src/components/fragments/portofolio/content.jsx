@@ -6,9 +6,9 @@ function CardPortofolio() {
   const [cards, setCards] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [currentIndex, setCurrentIndex] = useState(0); // Track the current card index for the carousel
-  const [touchStart, setTouchStart] = useState(0); // Track touch start position
-  const [touchEnd, setTouchEnd] = useState(0); // Track touch end position
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [touchStart, setTouchStart] = useState(0);
+  const [touchEnd, setTouchEnd] = useState(0);
   const carouselRef = useRef(null);
 
   useEffect(() => {
@@ -29,38 +29,31 @@ function CardPortofolio() {
     fetchPortfolios();
   }, []);
 
-  // Handle touch start
   const handleTouchStart = (e) => {
     setTouchStart(e.touches[0].clientX);
   };
 
-  // Handle touch move
   const handleTouchMove = (e) => {
     setTouchEnd(e.touches[0].clientX);
   };
 
-  // Handle touch end
   const handleTouchEnd = () => {
     if (touchStart - touchEnd > 50) {
-      // Swipe left
       setCurrentIndex((prevIndex) =>
         prevIndex === groupedCards.length - 1 ? 0 : prevIndex + 1
       );
     }
 
     if (touchStart - touchEnd < -50) {
-      // Swipe right
       setCurrentIndex((prevIndex) =>
         prevIndex === 0 ? groupedCards.length - 1 : prevIndex - 1
       );
     }
 
-    // Reset touch positions
     setTouchStart(0);
     setTouchEnd(0);
   };
 
-  // Group cards per 2 for desktop, single card group for mobile
   const groupedCards =
     window.innerWidth >= 768
       ? cards.reduce((result, card, index) => {
@@ -75,22 +68,24 @@ function CardPortofolio() {
   if (error) return <p className="text-center text-red-500">{error}</p>;
 
   return (
-    <div className="max-w-6xl mx-auto my-[100px] px-4">
-      <h1 className="flex justify-center text-2xl font-semibold">My Latest Work</h1>
+    <div className="max-w-6xl mx-auto my-[100px] px-6">
+      <h1 className="flex justify-center text-2xl font-semibold">
+        My Latest Work
+      </h1>
       <p className="flex justify-center mt-1 text-gray-500">
         Beberapa proyek dan karya terbaru saya.
       </p>
 
       {/* Carousel */}
       <div
-        className="relative overflow-hidden mt-16 px-4" // padding kiri kanan agar slide tidak nempel ke tepi
+        className="relative overflow-hidden mt-16"
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
       >
         <div
           ref={carouselRef}
-          className="flex transition-transform duration-700 ease-in-out"
+          className="flex transition-transform duration-700 ease-in-out -mx-3"
           style={{
             transform: `translateX(-${currentIndex * 100}%)`,
           }}
@@ -104,7 +99,7 @@ function CardPortofolio() {
               {group.map((card, idx) => (
                 <div
                   key={idx}
-                  className="bg-oren max-w-xs w-full p-4 flex flex-col rounded-md gap-4 mx-2" // mx-3 untuk jarak antar slide mobile
+                  className="bg-oren w-[450px] max-w-full p-4 flex flex-col rounded-md gap-4 mx-3"
                 >
                   <img
                     src={
@@ -119,8 +114,12 @@ function CardPortofolio() {
                     <span className="text-sm font-medium text-white/80">
                       {card.title}
                     </span>
-                    <h1 className="text-lg font-bold text-white">{card.client_name}</h1>
-                    <h1 className="text-xs text-white/80 font-medium">{card.date}</h1>
+                    <h1 className="text-lg font-bold text-white">
+                      {card.client_name}
+                    </h1>
+                    <h1 className="text-xs text-white/80 font-medium">
+                      {card.date}
+                    </h1>
                   </div>
                   <p className="text-sm text-white/80">
                     {card.description || "No Description"}
