@@ -34,8 +34,8 @@ function App() {
         <Route path="/" element={<HomePage />} />
         {/* <Route path="/service" element={<Service />} />
         <Route path="/portofolio" element={<Portofolio />} /> */}
-        {/* <Route path="*" element={<NotFounPage />} />
-        <Route path="/login" element={<Login />} /> */}
+        <Route path="*" element={<NotFounPage />} />
+        <Route path="/login" element={<Login />} />
         {/* Protected Admin Routes */}
         <Route path="/admin" element={<PrivateRoute />}>
           <Route index element={<AdminHomePage />} />{" "}

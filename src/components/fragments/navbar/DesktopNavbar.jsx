@@ -23,7 +23,7 @@ function DesktopNavbar() {
     { name: "About", id: "about" },
     // { name: "Vision", id: "vision" },
     { name: "Services", id: "services" },
-    { name: "Portfolio", id: "portofolio" },
+    { name: "Portofolio", id: "portofolio" },
   ];
 
   return (
