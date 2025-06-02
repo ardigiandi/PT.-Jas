@@ -9,7 +9,8 @@ function CardPortofolio() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [touchStart, setTouchStart] = useState(0);
   const [touchEnd, setTouchEnd] = useState(0);
-  const carouselRef = useRef(null);
+  const [notification, setNotification] = useState(""); // State untuk notif
+  const notificationTimeoutRef = useRef(null); // Simpan timeout supaya bisa clear
 
   useEffect(() => {
     const fetchPortfolios = async () => {
@@ -29,6 +30,23 @@ function CardPortofolio() {
     fetchPortfolios();
   }, []);
 
+  // Fungsi untuk ganti slide + munculkan notif
+  const goToSlide = (newIndex) => {
+    setCurrentIndex(newIndex);
+
+    // Tampilkan notif
+    setNotification(`Slide berubah ke ${newIndex + 1}`);
+
+    // Clear timeout lama kalau ada
+    if (notificationTimeoutRef.current) {
+      clearTimeout(notificationTimeoutRef.current);
+    }
+    // Sembunyikan notif setelah 2 detik
+    notificationTimeoutRef.current = setTimeout(() => {
+      setNotification("");
+    }, 2000);
+  };
+
   const handleTouchStart = (e) => {
     setTouchStart(e.touches[0].clientX);
   };
@@ -39,14 +57,16 @@ function CardPortofolio() {
 
   const handleTouchEnd = () => {
     if (touchStart - touchEnd > 50) {
-      setCurrentIndex((prevIndex) =>
-        prevIndex === groupedCards.length - 1 ? 0 : prevIndex + 1
+      // Swipe left
+      goToSlide(
+        currentIndex === groupedCards.length - 1 ? 0 : currentIndex + 1
       );
     }
 
     if (touchStart - touchEnd < -50) {
-      setCurrentIndex((prevIndex) =>
-        prevIndex === 0 ? groupedCards.length - 1 : prevIndex - 1
+      // Swipe right
+      goToSlide(
+        currentIndex === 0 ? groupedCards.length - 1 : currentIndex - 1
       );
     }
 
@@ -75,6 +95,13 @@ function CardPortofolio() {
       <p className="flex justify-center mt-1 text-gray-500">
         Beberapa proyek dan karya terbaru saya.
       </p>
+
+      {/* Notifikasi slide */}
+      {notification && (
+        <div className="fixed top-5 left-1/2 -translate-x-1/2 bg-black bg-opacity-70 text-white px-6 py-2 rounded-md shadow-lg z-50">
+          {notification}
+        </div>
+      )}
 
       {/* Carousel */}
       <div
@@ -134,9 +161,7 @@ function CardPortofolio() {
         <button
           className="hidden lg:flex items-center justify-center absolute top-1/2 left-4 transform -translate-y-1/2 bg-gray-800 text-white hover:bg-gray-700 shadow-lg rounded-full w-10 h-10 transition-all duration-300"
           onClick={() =>
-            setCurrentIndex((prevIndex) =>
-              prevIndex === 0 ? groupedCards.length - 1 : prevIndex - 1
-            )
+            goToSlide(currentIndex === 0 ? groupedCards.length - 1 : currentIndex - 1)
           }
         >
           <ChevronLeft className="w-5 h-5" />
@@ -144,9 +169,7 @@ function CardPortofolio() {
         <button
           className="hidden lg:flex items-center justify-center absolute top-1/2 right-4 transform -translate-y-1/2 bg-gray-800 text-white hover:bg-gray-700 shadow-lg rounded-full w-10 h-10 transition-all duration-300"
           onClick={() =>
-            setCurrentIndex((prevIndex) =>
-              prevIndex === groupedCards.length - 1 ? 0 : prevIndex + 1
-            )
+            goToSlide(currentIndex === groupedCards.length - 1 ? 0 : currentIndex + 1)
           }
         >
           <ChevronRight className="w-5 h-5" />
