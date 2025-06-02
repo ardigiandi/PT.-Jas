@@ -1,14 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import axiosInstance from "@/api/axiosInstance";
-import Pagination from "@/components/elements/pagination"; 
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 function CardPortofolio() {
   const [cards, setCards] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [currentPage, setCurrentPage] = useState(1);
-
-  const cardsPerPage = 6;
+  const [currentIndex, setCurrentIndex] = useState(0); // Track the current card index for the carousel
+  const carouselRef = useRef(null);
 
   useEffect(() => {
     const fetchPortfolios = async () => {
@@ -28,9 +27,27 @@ function CardPortofolio() {
     fetchPortfolios();
   }, []);
 
-  const totalPages = Math.ceil(cards.length / cardsPerPage);
-  const startIndex = (currentPage - 1) * cardsPerPage;
-  const currentCards = cards.slice(startIndex, startIndex + cardsPerPage);
+  // Auto-slide every 3 seconds
+  useEffect(() => {
+    const interval = setInterval(() => {
+      const itemsToShow = window.innerWidth >= 768 ? 2 : 1; // Show 2 cards on desktop, 1 on mobile
+      setCurrentIndex((prevIndex) =>
+        prevIndex === cards.length - itemsToShow ? 0 : prevIndex + 1
+      );
+    }, 7000);
+
+    return () => clearInterval(interval); // Cleanup interval on unmount
+  }, [cards]);
+
+  const groupedCards =
+    window.innerWidth >= 768
+      ? cards.reduce((result, card, index) => {
+          const groupIndex = Math.floor(index / 2);
+          if (!result[groupIndex]) result[groupIndex] = [];
+          result[groupIndex].push(card);
+          return result;
+        }, [])
+      : cards.map((card) => [card]);
 
   if (loading) return <p className="text-center text-white">Loading...</p>;
   if (error) return <p className="text-center text-red-500">{error}</p>;
@@ -40,45 +57,80 @@ function CardPortofolio() {
       <h1 className="flex justify-center text-2xl font-semibold">
         My Latest Work
       </h1>
-      <p className="flex justify-center mt-1 text-gray-500">Beberapa proyek dan karya terbaru saya.</p>
+      <p className="flex justify-center mt-1 text-gray-500">
+        Beberapa proyek dan karya terbaru saya.
+      </p>
 
-      <div className="flex flex-wrap justify-center mt-16 gap-5">
-        {currentCards.map((card, index) => (
-          <div
-            key={index}
-            className="bg-oren w-[550px] p-5 flex flex-col rounded-md gap-5"
-          >
-            <img
-              src={
-                card.photos && card.photos.length > 0
-                  ? `${axiosInstance.defaults.baseURL}/storage/${card.photos[0].photo_path}`
-                  : "/default-image.jpg"
-              }
-              alt={card.title || "No title"}
-              className="w-full h-[400px] object-cover rounded-md"
-            />
-            <div className="space-y-2">
-              <span className="text-sm font-medium text-white/80">
-                {card.title}
-              </span>
-              <h1 className="text-2xl font-bold text-white">
-                {card.client_name}
-              </h1>
-              <h1 className="text-sm text-white/80 font-medium">{card.date}</h1>
+      {/* Carousel */}
+      <div className="relative overflow-hidden mt-16">
+        <div
+          ref={carouselRef}
+          className="flex transition-transform duration-1000 ease-in-out"
+          style={{
+            transform: `translateX(-${currentIndex * 100}%)`,
+          }}
+        >
+          {groupedCards.map((group, index) => (
+            <div
+              key={index}
+              className="flex-shrink-0 flex justify-center gap-4 w-full"
+              style={{ flexBasis: "100%" }}
+            >
+              {group.map((card, idx) => (
+                <div
+                  key={idx}
+                  className="bg-oren w-[450px] p-4 flex flex-col rounded-md gap-4"
+                >
+                  <img
+                    src={
+                      card.photos && card.photos.length > 0
+                        ? `${axiosInstance.defaults.baseURL}/storage/${card.photos[0].photo_path}`
+                        : "/default-image.jpg"
+                    }
+                    alt={card.title || "No title"}
+                    className="w-full h-[350px] object-cover rounded-md"
+                  />
+                  <div className="space-y-2">
+                    <span className="text-sm font-medium text-white/80">
+                      {card.title}
+                    </span>
+                    <h1 className="text-lg font-bold text-white">
+                      {card.client_name}
+                    </h1>
+                    <h1 className="text-xs text-white/80 font-medium">
+                      {card.date}
+                    </h1>
+                  </div>
+                  <p className="text-sm text-white/80">
+                    {card.description || "No Description"}
+                  </p>
+                </div>
+              ))}
             </div>
-            <p className="text-base text-white/80">
-              {card.description || "No Description"}
-            </p>
-          </div>
-        ))}
+          ))}
+        </div>
+        {/* Navigation Buttons */}
+        <button
+          className="hidden lg:flex items-center justify-center absolute top-1/2 left-4 transform -translate-y-1/2 bg-gray-800 text-white hover:bg-gray-700 shadow-lg rounded-full w-10 h-10 transition-all duration-300"
+          onClick={() =>
+            setCurrentIndex((prevIndex) =>
+              prevIndex === 0 ? groupedCards.length - 1 : prevIndex - 1
+            )
+          }
+        >
+          <ChevronLeft className="w-5 h-5" />
+        </button>
+        <button
+          className="hidden lg:flex items-center justify-center absolute top-1/2 right-4 transform -translate-y-1/2 bg-gray-800 text-white hover:bg-gray-700 shadow-lg rounded-full w-10 h-10 transition-all duration-300"
+          onClick={() =>
+            setCurrentIndex((prevIndex) =>
+              prevIndex === groupedCards.length - 1 ? 0 : prevIndex + 1
+            )
+          }
+        >
+          <ChevronRight className="w-5 h-5" />
+        </button>
       </div>
-
-      {/* Pagination */}
-      <Pagination
-        currentPage={currentPage}
-        totalPages={totalPages}
-        onPageChange={setCurrentPage}
-      />
     </div>
   );
 }

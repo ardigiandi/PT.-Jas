@@ -5,7 +5,7 @@ function Hero() {
   return (
     <div className="relative  h-[calc(100vh-64px)] mt-[64px] w-full">
       <img
-        src="/assets/hero.png"
+        src="/assets/hero.jpg"
         alt="Hero Image"
         className="absolute h-full w-full object-cover"
       />

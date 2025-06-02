@@ -1,10 +1,10 @@
 import React from "react";
 import HeroSection from "@/components/layouts/HeroLayouts";
 import ClientLayout from "@/components/layouts/ClientLayouts";
-import TentangLayouts from "@/components/layouts/TentangViews";
+import TentangLayouts from "@/components/layouts/TentangLayouts";
 import VisiMisiLayouts from "@/components/layouts/VisiMisiLayouts";
 import ServiceView from "@/components/layouts/ServicesLayout";
-import CardPortofolio from "@/components/fragments/portofolio/content";
+import CardPortofolio from "@/components/layouts/PortofolioLayouts";
 import Footer from "@/components/fragments/footer/footer";
 // import DesktopNavbar from "@/components/DesktopNavbar";
 

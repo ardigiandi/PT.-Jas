@@ -19,7 +19,7 @@ function DesktopNavbar() {
 
   const navbarItems = [
     { name: "Home", id: "hero" },
-    { name: "Clients", id: "clients" },
+    // { name: "Clients", id: "clients" },
     { name: "About", id: "about" },
     // { name: "Vision", id: "vision" },
     { name: "Services", id: "services" },

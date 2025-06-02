@@ -7,7 +7,7 @@ function TentangKami() {
       <img
         src="/assets/depan.png"
         alt=""
-        className="lg:w-[441px] w-full rounded-md border border-abu"
+        className="lg:w-[441px] w-full rounded-md"
       />
       <div className="flex flex-col gap-4 w-full lg:w-[601px] items-start">
         <h1 className="text-[28px] font-semibold w-fit left-4 lg:left-0 py-2 relative">
