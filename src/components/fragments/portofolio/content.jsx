@@ -7,6 +7,8 @@ function CardPortofolio() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [currentIndex, setCurrentIndex] = useState(0); // Track the current card index for the carousel
+  const [touchStart, setTouchStart] = useState(0); // Track touch start position
+  const [touchEnd, setTouchEnd] = useState(0); // Track touch end position
   const carouselRef = useRef(null);
 
   useEffect(() => {
@@ -27,17 +29,36 @@ function CardPortofolio() {
     fetchPortfolios();
   }, []);
 
-  // Auto-slide every 3 seconds
-  useEffect(() => {
-    const interval = setInterval(() => {
-      const itemsToShow = window.innerWidth >= 768 ? 2 : 1; // Show 2 cards on desktop, 1 on mobile
-      setCurrentIndex((prevIndex) =>
-        prevIndex === cards.length - itemsToShow ? 0 : prevIndex + 1
-      );
-    }, 7000);
+  // Handle touch start
+  const handleTouchStart = (e) => {
+    setTouchStart(e.touches[0].clientX);
+  };
 
-    return () => clearInterval(interval); // Cleanup interval on unmount
-  }, [cards]);
+  // Handle touch move
+  const handleTouchMove = (e) => {
+    setTouchEnd(e.touches[0].clientX);
+  };
+
+  // Handle touch end
+  const handleTouchEnd = () => {
+    if (touchStart - touchEnd > 50) {
+      // Swipe left
+      setCurrentIndex((prevIndex) =>
+        prevIndex === groupedCards.length - 1 ? 0 : prevIndex + 1
+      );
+    }
+
+    if (touchStart - touchEnd < -50) {
+      // Swipe right
+      setCurrentIndex((prevIndex) =>
+        prevIndex === 0 ? groupedCards.length - 1 : prevIndex - 1
+      );
+    }
+
+    // Reset touch positions
+    setTouchStart(0);
+    setTouchEnd(0);
+  };
 
   const groupedCards =
     window.innerWidth >= 768
@@ -62,10 +83,15 @@ function CardPortofolio() {
       </p>
 
       {/* Carousel */}
-      <div className="relative overflow-hidden mt-16">
+      <div
+        className="relative overflow-hidden mt-16"
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
+      >
         <div
           ref={carouselRef}
-          className="flex transition-transform duration-1000 ease-in-out"
+          className="flex transition-transform duration-700 ease-in-out"
           style={{
             transform: `translateX(-${currentIndex * 100}%)`,
           }}
