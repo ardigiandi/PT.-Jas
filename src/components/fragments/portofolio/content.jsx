@@ -60,6 +60,7 @@ function CardPortofolio() {
     setTouchEnd(0);
   };
 
+  // Group cards per 2 for desktop, single card group for mobile
   const groupedCards =
     window.innerWidth >= 768
       ? cards.reduce((result, card, index) => {
@@ -75,16 +76,14 @@ function CardPortofolio() {
 
   return (
     <div className="max-w-6xl mx-auto my-[100px] px-4">
-      <h1 className="flex justify-center text-2xl font-semibold">
-        My Latest Work
-      </h1>
+      <h1 className="flex justify-center text-2xl font-semibold">My Latest Work</h1>
       <p className="flex justify-center mt-1 text-gray-500">
         Beberapa proyek dan karya terbaru saya.
       </p>
 
       {/* Carousel */}
       <div
-        className="relative overflow-hidden mt-16"
+        className="relative overflow-hidden mt-16 px-4" // padding kiri kanan agar slide tidak nempel ke tepi
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
@@ -99,13 +98,13 @@ function CardPortofolio() {
           {groupedCards.map((group, index) => (
             <div
               key={index}
-              className="flex-shrink-0 flex justify-center gap-4 w-full"
+              className="flex-shrink-0 flex gap-5 justify-center w-full"
               style={{ flexBasis: "100%" }}
             >
               {group.map((card, idx) => (
                 <div
                   key={idx}
-                  className="bg-oren w-[450px] p-4 flex flex-col rounded-md gap-4"
+                  className="bg-oren max-w-xs w-full p-4 flex flex-col rounded-md gap-4 mx-3" // mx-3 untuk jarak antar slide mobile
                 >
                   <img
                     src={
@@ -120,12 +119,8 @@ function CardPortofolio() {
                     <span className="text-sm font-medium text-white/80">
                       {card.title}
                     </span>
-                    <h1 className="text-lg font-bold text-white">
-                      {card.client_name}
-                    </h1>
-                    <h1 className="text-xs text-white/80 font-medium">
-                      {card.date}
-                    </h1>
+                    <h1 className="text-lg font-bold text-white">{card.client_name}</h1>
+                    <h1 className="text-xs text-white/80 font-medium">{card.date}</h1>
                   </div>
                   <p className="text-sm text-white/80">
                     {card.description || "No Description"}
@@ -135,6 +130,7 @@ function CardPortofolio() {
             </div>
           ))}
         </div>
+
         {/* Navigation Buttons */}
         <button
           className="hidden lg:flex items-center justify-center absolute top-1/2 left-4 transform -translate-y-1/2 bg-gray-800 text-white hover:bg-gray-700 shadow-lg rounded-full w-10 h-10 transition-all duration-300"
