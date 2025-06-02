@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import axiosInstance from "@/api/axiosInstance";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, Info } from "lucide-react";
 
 function CardPortofolio() {
   const [cards, setCards] = useState([]);
@@ -9,7 +9,7 @@ function CardPortofolio() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [touchStart, setTouchStart] = useState(0);
   const [touchEnd, setTouchEnd] = useState(0);
-  const carouselRef = useRef(null);
+  const [showHint, setShowHint] = useState(true); // Tampilkan hint slide
 
   useEffect(() => {
     const fetchPortfolios = async () => {
@@ -29,6 +29,14 @@ function CardPortofolio() {
     fetchPortfolios();
   }, []);
 
+  // Fungsi untuk menghilangkan hint setelah 5 detik
+  useEffect(() => {
+    if (showHint) {
+      const timeout = setTimeout(() => setShowHint(false), 5000);
+      return () => clearTimeout(timeout);
+    }
+  }, [showHint]);
+
   const handleTouchStart = (e) => {
     setTouchStart(e.touches[0].clientX);
   };
@@ -39,12 +47,14 @@ function CardPortofolio() {
 
   const handleTouchEnd = () => {
     if (touchStart - touchEnd > 50) {
+      // Swipe left
       setCurrentIndex((prevIndex) =>
         prevIndex === groupedCards.length - 1 ? 0 : prevIndex + 1
       );
     }
 
     if (touchStart - touchEnd < -50) {
+      // Swipe right
       setCurrentIndex((prevIndex) =>
         prevIndex === 0 ? groupedCards.length - 1 : prevIndex - 1
       );
@@ -76,6 +86,14 @@ function CardPortofolio() {
         Beberapa proyek dan karya terbaru saya.
       </p>
 
+      {/* Hint untuk swipe */}
+      {showHint && (
+        <div className="fixed top-10 left-1/2 -translate-x-1/2 bg-blue-600 text-white px-4 py-2 rounded-full shadow-md flex items-center gap-2 z-50">
+          <Info className="w-4 h-4" />
+          Geser ke kanan atau kiri untuk melihat lebih banyak karya!
+        </div>
+      )}
+
       {/* Carousel */}
       <div
         className="relative overflow-hidden mt-16"
@@ -84,7 +102,6 @@ function CardPortofolio() {
         onTouchEnd={handleTouchEnd}
       >
         <div
-          ref={carouselRef}
           className="flex transition-transform duration-700 ease-in-out -mx-3"
           style={{
             transform: `translateX(-${currentIndex * 100}%)`,
