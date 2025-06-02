@@ -104,7 +104,7 @@ function CardPortofolio() {
               {group.map((card, idx) => (
                 <div
                   key={idx}
-                  className="bg-oren max-w-xs w-full p-4 flex flex-col rounded-md gap-4 mx-1" // mx-3 untuk jarak antar slide mobile
+                  className="bg-oren max-w-xs w-full p-4 flex flex-col rounded-md gap-4 mx-2" // mx-3 untuk jarak antar slide mobile
                 >
                   <img
                     src={
