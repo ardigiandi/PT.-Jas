@@ -10,7 +10,6 @@ import {
   CircleHelp,
 } from "lucide-react";
 import { useState } from "react";
-import { Link } from "react-router-dom";
 
 import {
   Sheet,
@@ -32,19 +31,26 @@ function MobileNavbar() {
 
   const [showMobileMenu, setShowMobileMenu] = useState(false);
 
+  const scrollToSection = (id) => {
+    const section = document.getElementById(id);
+    if (section) {
+      section.scrollIntoView({ behavior: "smooth" });
+      setShowMobileMenu(false); // Tutup menu setelah klik
+    }
+  };
+
+  const navbarItems = [
+    { name: "Home", id: "hero", icon: <HomeIcon className="w-4 h-4" /> },
+    { name: "Services", id: "services", icon: <HammerIcon className="w-4 h-4" /> },
+    { name: "Feature", id: "feature", icon: <SquareLibrary className="w-4 h-4" /> },
+    { name: "Portofolio", id: "portofolio", icon: <CircleCheck className="w-4 h-4" /> },
+    { name: "FAQ", id: "faq", icon: <CircleHelp className="w-4 h-4" /> },
+  ];
+
   return (
     <div className="flex lg:hidden">
       <button onClick={handleThemeChange}>
-        {theme === "dark" && (
-          <h1>
-            <Moon></Moon>
-          </h1>
-        )}
-        {theme === "light" && (
-          <h1>
-            <Sun></Sun>
-          </h1>
-        )}
+        {theme === "dark" ? <Moon /> : <Sun />}
       </button>
 
       <Sheet open={showMobileMenu} onOpenChange={setShowMobileMenu}>
@@ -60,56 +66,17 @@ function MobileNavbar() {
           </SheetHeader>
 
           <nav className="flex flex-col gap-4 mt-6 mx-2">
-            <Button
-              variant="ghost"
-              className="flex items-center gap-3 justify-start"
-              asChild
-            >
-              <Link to="/">
-                <HomeIcon className="w-4 h-4" />
-                Home
-              </Link>
-            </Button>
-            <Button
-              variant="ghost"
-              className="flex items-center gap-3 justify-start"
-              asChild
-            >
-              <Link to="/service">
-                <HammerIcon className="w-4 h-4" />
-                Services
-              </Link>
-            </Button>
-            <Button
-              variant="ghost"
-              className="flex items-center gap-3 justify-start"
-              asChild
-            >
-              <Link to="/">
-                <SquareLibrary className="w-4 h-4" />
-                Feature
-              </Link>
-            </Button>
-            <Button
-              variant="ghost"
-              className="flex items-center gap-3 justify-start"
-              asChild
-            >
-              <Link to="/">
-                <CircleCheck className="w-4 h-4" />
-                Testimonial
-              </Link>
-            </Button>
-            <Button
-              variant="ghost"
-              className="flex items-center gap-3 justify-start"
-              asChild
-            >
-              <Link to="/">
-                <CircleHelp className="w-4 h-4" />
-                FAQ
-              </Link>
-            </Button>
+            {navbarItems.map((item, index) => (
+              <Button
+                key={index}
+                variant="ghost"
+                className="flex items-center gap-3 justify-start"
+                onClick={() => scrollToSection(item.id)}
+              >
+                {item.icon}
+                {item.name}
+              </Button>
+            ))}
           </nav>
         </SheetContent>
       </Sheet>

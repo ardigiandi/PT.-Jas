@@ -1,10 +1,8 @@
 import { useTheme } from "@/components/fragments/theme-provider";
 import { Sun, Moon } from "lucide-react";
-import { Link, useLocation } from "react-router-dom";
 
 function DesktopNavbar() {
   const { theme, setTheme } = useTheme();
-  const pathname = useLocation().pathname;
   const themes = ["light", "dark"];
 
   const handleThemeChange = () => {
@@ -12,12 +10,20 @@ function DesktopNavbar() {
     setTheme(newTheme);
   };
 
+  const scrollToSection = (id) => {
+    const section = document.getElementById(id);
+    if (section) {
+      section.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   const navbarItems = [
-    { name: "Home", path: "/" },
-    { name: "Service", path: "/service" },
-    { name: "Feature", path: "/feature" },
-    { name: "Portofolio", path: "/portofolio" },
-    { name: "FAQ", path: "/faq" },
+    { name: "Home", id: "hero" },
+    { name: "Clients", id: "clients" },
+    { name: "About", id: "about" },
+    // { name: "Vision", id: "vision" },
+    { name: "Services", id: "services" },
+    { name: "Portfolio", id: "portofolio" },
   ];
 
   return (
@@ -25,14 +31,12 @@ function DesktopNavbar() {
       <ul className="flex gap-14 items-center">
         {navbarItems.map((item, index) => (
           <li key={index}>
-            <Link
-              to={item.path}
-              className={`text-base ${
-                pathname === item.path ? "text-oren" : ""
-              }`}
+            <button
+              onClick={() => scrollToSection(item.id)}
+              className="text-base hover:text-orange-500 transition"
             >
               {item.name}
-            </Link>
+            </button>
           </li>
         ))}
       </ul>
