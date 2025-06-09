@@ -1,6 +1,6 @@
 import { Routes, Route, useLocation } from "react-router-dom";
 import HomePage from "./pages/home";
-import Service from "./pages/service";
+// import Service from "./pages/service";
 import NotFounPage from "./pages/notfoundpage";
 import Navbar from "./components/fragments/navbar/Navbar";
 import Login from "./pages/login";
@@ -15,7 +15,7 @@ import AdminPhotoPage from "./pages/admin/PhotoPage"; // Import AdminPhotoPage
 import PrivateRoute from "./components/PrivateRoute"; // Import PrivateRoute
 // import PortfolioCreate from "./components/fragments/admin/PortfolioCreate"; // No longer needed as creation is in a modal
 // import PortfolioEdit from "./components/fragments/admin/PortfolioEdit"; // No longer needed as editing is in a modal
-import Portofolio from "./pages/portofolio";
+// import Portofolio from "./pages/portofolio";
 
 function App() {
   const location = useLocation();
