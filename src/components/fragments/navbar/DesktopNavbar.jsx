@@ -1,14 +1,14 @@
 import { useTheme } from "@/components/fragments/theme-provider";
-import { Sun, Moon } from "lucide-react";
+// import { Sun, Moon } from "lucide-react";
 
 function DesktopNavbar() {
   const { theme, setTheme } = useTheme();
   const themes = ["light", "dark"];
 
-  const handleThemeChange = () => {
-    const newTheme = themes[(themes.indexOf(theme) + 1) % themes.length];
-    setTheme(newTheme);
-  };
+  // const handleThemeChange = () => {
+  //   const newTheme = themes[(themes.indexOf(theme) + 1) % themes.length];
+  //   setTheme(newTheme);
+  // };
 
   const scrollToSection = (id) => {
     const section = document.getElementById(id);
@@ -41,11 +41,11 @@ function DesktopNavbar() {
         ))}
       </ul>
 
-      <div className="flex gap-5">
+      {/* <div className="flex gap-5">
         <button onClick={handleThemeChange} aria-label="Toggle theme">
           {theme === "dark" ? <Moon /> : <Sun />}
         </button>
-      </div>
+      </div> */}
     </div>
   );
 }

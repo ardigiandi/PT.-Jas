@@ -28,7 +28,7 @@ function Footer() {
                 Tentang Kami
               </a>
               <a href="#" className="text-white text-base">
-                Blog
+                Services
               </a>
               <a href="#" className="text-white text-base">
                 Kontak Kami
@@ -39,7 +39,7 @@ function Footer() {
             </li>
           </ul>
         </div>
-        <div className="flex flex-col">
+        {/* <div className="flex flex-col">
           <h1 className="text-white text-xl font-semibold">Support</h1>
           <ul>
             <li className="flex flex-col gap-2 mt-5">
@@ -57,7 +57,7 @@ function Footer() {
               </a>
             </li>
           </ul>
-        </div>
+        </div> */}
       </div>
       {/* <img
         src="/assets/pattern.svg"

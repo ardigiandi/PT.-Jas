@@ -1,5 +1,5 @@
 import { useTheme } from "@/components/fragments/theme-provider";
-import { Sun, Moon } from "lucide-react";
+// import { Sun, Moon } from "lucide-react";
 import { Button } from "../../ui/button";
 import {
   HammerIcon,
@@ -24,10 +24,10 @@ function MobileNavbar() {
   const { theme, setTheme } = useTheme();
   const themes = ["light", "dark"];
 
-  const handleThemeChange = () => {
-    const newTheme = themes[(themes.indexOf(theme) + 1) % themes.length];
-    setTheme(newTheme);
-  };
+  // const handleThemeChange = () => {
+  //   const newTheme = themes[(themes.indexOf(theme) + 1) % themes.length];
+  //   setTheme(newTheme);
+  // };
 
   const [showMobileMenu, setShowMobileMenu] = useState(false);
 
@@ -49,9 +49,9 @@ function MobileNavbar() {
 
   return (
     <div className="flex lg:hidden">
-      <button onClick={handleThemeChange}>
+      {/* <button onClick={handleThemeChange}>
         {theme === "dark" ? <Moon /> : <Sun />}
-      </button>
+      </button> */}
 
       <Sheet open={showMobileMenu} onOpenChange={setShowMobileMenu}>
         <SheetTrigger asChild>
@@ -61,8 +61,8 @@ function MobileNavbar() {
         </SheetTrigger>
         <SheetContent>
           <SheetHeader>
-            <SheetTitle>Menu</SheetTitle>
-            <SheetDescription>Choose an option</SheetDescription>
+            {/* <SheetTitle>Menu</SheetTitle>
+            <SheetDescription>Choose an option</SheetDescription> */}
           </SheetHeader>
 
           <nav className="flex flex-col gap-4 mt-6 mx-2">
