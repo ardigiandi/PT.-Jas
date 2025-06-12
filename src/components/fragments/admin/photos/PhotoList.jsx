@@ -106,7 +106,10 @@ const PhotoList = () => {
               className="w-full h-48 object-cover"
             />
             <div className="p-4">
-              <p className="text-sm text-gray-600 mb-2">
+              <p className="text-sm text-gray-600 mb-2 text-center">
+                {photo.caption || "No caption provided"}
+              </p>
+              <p className="text-sm text-gray-600 mb-2 text-center">
                 Portfolio:{" "}
                 {photo.portfolio ? photo.portfolio.title : photo.portfolio_id}
               </p>
