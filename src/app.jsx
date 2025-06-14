@@ -5,14 +5,16 @@ import NotFounPage from "./pages/notfoundpage";
 import Navbar from "./components/fragments/navbar/Navbar";
 import Login from "./pages/login";
 import AdminDashboard from "./pages/admin/dashboard";
-import PortfolioList from "./components/fragments/admin/PortfolioList";
-import PhotoList from "./components/fragments/admin/photos/PhotoList"; // Import PhotoList
+// import PortfolioList from "./components/fragments/admin/PortfolioList";
+// import PhotoList from "./components/fragments/admin/photos/PhotoList"; // Import PhotoList
 // import PhotoCreate from "./components/fragments/admin/photos/PhotoCreate"; // Remove PhotoCreate import
 // import PhotoEdit from "./components/fragments/admin/photos/PhotoEdit"; // Remove PhotoEdit import
 import AdminHomePage from "./pages/admin/HomePage"; // Import AdminHomePage
 import AdminPortfolioPage from "./pages/admin/PortfolioPage"; // Import AdminPortfolioPage
 import AdminPhotoPage from "./pages/admin/PhotoPage"; // Import AdminPhotoPage
 import PrivateRoute from "./components/PrivateRoute"; // Import PrivateRoute
+import PortofolioDetail from "./components/fragments/portofoliodetail/detail";
+// import PortofolioDetail from "./pages/portofolioDetail";
 // import PortfolioCreate from "./components/fragments/admin/PortfolioCreate"; // No longer needed as creation is in a modal
 // import PortfolioEdit from "./components/fragments/admin/PortfolioEdit"; // No longer needed as editing is in a modal
 // import Portofolio from "./pages/portofolio";
@@ -35,6 +37,7 @@ function App() {
         {/* <Route path="/service" element={<Service />} />
         <Route path="/portofolio" element={<Portofolio />} /> */}
         <Route path="*" element={<NotFounPage />} />
+        <Route path="/portofolio/:id" element={<PortofolioDetail />} />
         <Route path="/login" element={<Login />} />
         {/* Protected Admin Routes */}
         <Route path="/admin" element={<PrivateRoute />}>

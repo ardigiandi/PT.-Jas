@@ -24,17 +24,17 @@ function Footer() {
           <h1 className="text-white text-xl font-semibold">Company</h1>
           <ul>
             <li className="flex flex-col gap-2 mt-5">
-              <a href="#" className="text-white text-base">
+              <a href="/#about" className="text-white text-base">
                 Tentang Kami
               </a>
-              <a href="#" className="text-white text-base">
+              <a href="/#services" className="text-white text-base">
                 Services
               </a>
-              <a href="#" className="text-white text-base">
+              <a href="/#cta" className="text-white text-base">
                 Kontak Kami
               </a>
-              <a href="#" className="text-white text-base">
-                Testimonials
+              <a href="/#portofolio" className="text-white text-base">
+                portofolio
               </a>
             </li>
           </ul>

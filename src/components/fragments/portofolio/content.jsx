@@ -11,23 +11,46 @@ function CardPortofolio() {
   const [touchEnd, setTouchEnd] = useState(0);
   const carouselRef = useRef(null);
 
-  useEffect(() => {
-    const fetchPortfolios = async () => {
-      try {
-        setLoading(true);
-        const response = await axiosInstance.get("/api/portofolios");
-        setCards(Array.isArray(response.data.data) ? response.data.data : []);
-        setError(null);
-      } catch (err) {
-        console.error("Error fetching data:", err);
-        setError("Failed to fetch portfolios.");
-      } finally {
-        setLoading(false);
-      }
-    };
+  // useEffect(() => {
+  //   const fetchPortfolios = async () => {
+  //     try {
+  //       setLoading(true);
+  //       const response = await axiosInstance.get("/api/portofoliosindex");
+  //       console.log("Portfolios:", response.data.data);
+  //       // setCards(Array.isArray(response.data.data) ? response.data.data : []);
+  //       // setCards(Array.isArray(response.data.data) ? response.data.data : []);
+  //       // setCards(Array.isArray(response.data) ? response.data : []);
+  //       setError(null);
+  //     } catch (err) {
+  //       // console.error("Error fetching data:", err);
+  //       setError("Failed to fetch portfolios.");
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  //   };
 
-    fetchPortfolios();
-  }, []);
+  //   fetchPortfolios();
+  // }, []);
+
+  useEffect(() => {
+  const fetchPortfolios = async () => {
+    try {
+      setLoading(true);
+      const response = await axiosInstance.get("/api/portofoliosindex");
+      const portfolios = response.data.data;
+      setCards(Array.isArray(portfolios) ? portfolios : []);
+      setError(null);
+    } catch (err) {
+      console.error("Error fetching data:", err);
+      setError("Gagal mengambil data portofolio.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  fetchPortfolios();
+}, []);
+
 
   const handleTouchStart = (e) => {
     setTouchStart(e.touches[0].clientX);
@@ -101,10 +124,10 @@ function CardPortofolio() {
                   key={idx}
                   className="bg-oren w-[450px] max-w-full p-4 flex flex-col rounded-md gap-4 mx-3"
                 >
-                  <img
+                 <img
                     src={
-                      card.photos && card.photos.length > 0
-                        ? `${axiosInstance.defaults.baseURL}/storage/${card.photos[0].photo_path}`
+                      card.photo_path
+                        ? `${axiosInstance.defaults.baseURL}/storage/${card.photo_path}`
                         : "/default-image.jpg"
                     }
                     alt={card.title || "No title"}

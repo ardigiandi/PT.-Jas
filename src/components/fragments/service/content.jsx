@@ -3,8 +3,8 @@ import React from "react";
 const cardList = [
   {
     id: 1,
-    title: "Search engine",
-    subtitle: "Optimization",
+    title: "Penyediaan Peralatan",
+    subtitle: "Dapur Komersial",
     textColor: 'text-black',
     description: "Learn more",
     desc_image: "/assets/arrow.svg",
@@ -13,8 +13,8 @@ const cardList = [
   },
   {
     id: 2,
-    title: "Search engine",
-    subtitle: "Optimization",
+    title: "Penyediaan Mesin",
+    subtitle: "Pengolahan Makanan",
     textColor: 'text-white',
     description: "Learn more",
     desc_image: "/assets/arrow.svg",
@@ -23,8 +23,8 @@ const cardList = [
   },
   {
     id: 3,
-    title: "Search engine",
-    subtitle: "Optimization",
+    title: "Fabrikasi Peralatan",
+    subtitle: "Stainless Custom",
     textColor: 'text-white',
     description: "Learn more",
     desc_image: "/assets/arrow.svg",
@@ -33,8 +33,8 @@ const cardList = [
   },
   {
     id: 4,
-    title: "Search engine",
-    subtitle: "Optimization",
+    title: " Instalasi Jalur Pipa Gas",
+    subtitle: "untuk Dapur Komersial",
     // textColor: 'bg-[#F58220]',
     description: "Learn more",
     desc_image: "/assets/arrow.svg",
@@ -60,21 +60,21 @@ function ContentPage() {
         {cardList.map((card, index) => (
           <div
             key={index}
-            className={`flex flex-col lg:flex-row gap-12 p-[50px] rounded-4xl border border-black ${card.bgColor}`}
+            className={`flex flex-col lg:flex-row items-center gap-12 p-[40px] rounded-4xl border border-black ${card.bgColor}`}
           >
             <div className="flex flex-col justify-between gap-6 lg:gap-0">
               <div>
-                <h1 className={`text-2xl font-medium p-1 w-fit rounded-sm ${card.textColor}`}>
+                <h1 className={`text-xl font-medium p-1 w-fit rounded-sm ${card.textColor}`}>
                   {card.title}
                 </h1>
-                <h1 className={`text-2xl font-medium p-1 w-fit rounded-sm ${card.textColor}`} >
+                <h1 className={`text-xl font-medium p-1 w-fit rounded-sm ${card.textColor}`} >
                   {card.subtitle}
                 </h1>
               </div>
-              <div className="flex gap-4 items-center">
+              {/* <div className="flex gap-4 items-center">
                 <img src={card.desc_image} alt="" />
                 <h1 className={`text-lg font-medium ${card.textColor} `}>{card.description}</h1>
-              </div>
+              </div> */}
             </div>
             <img src={card.image} alt="" />
           </div>
