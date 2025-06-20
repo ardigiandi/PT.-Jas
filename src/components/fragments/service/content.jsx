@@ -8,7 +8,7 @@ const cardList = [
     textColor: 'text-black',
     description: "Learn more",
     desc_image: "/assets/arrow.svg",
-    image: "/assets/service1.svg",
+    image: "/assets/card1.png",
     bgColor: "bg-[#F3F3F3]",
   },
   {
@@ -18,7 +18,7 @@ const cardList = [
     textColor: 'text-white',
     description: "Learn more",
     desc_image: "/assets/arrow.svg",
-    image: "/assets/service1.svg",
+    image: "/assets/card1.png",
     bgColor: "bg-[#F58220]",
   },
   {
@@ -28,7 +28,7 @@ const cardList = [
     textColor: 'text-white',
     description: "Learn more",
     desc_image: "/assets/arrow.svg",
-    image: "/assets/service1.svg",
+    image: "/assets/card1.png",
     bgColor: "bg-[#F58220]",
   },
   {
@@ -38,7 +38,7 @@ const cardList = [
     // textColor: 'bg-[#F58220]',
     description: "Learn more",
     desc_image: "/assets/arrow.svg",
-    image: "/assets/service1.svg",
+    image: "/assets/card1.png",
     bgColor: "bg-[#F3F3F3]",
   },
 ];
@@ -75,7 +75,7 @@ function ContentPage() {
                 <h1 className={`text-lg font-medium ${card.textColor} `}>{card.description}</h1>
               </div> */}
             </div>
-            <img src={card.image} alt="" />
+            <img src={card.image} alt="" className="w-[200px]" />
           </div>
         ))}
       </div>
