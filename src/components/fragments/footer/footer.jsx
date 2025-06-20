@@ -10,18 +10,26 @@ function Footer() {
       /> */}
       <div className="flex flex-col">
         <img src="/assets/logo-white.png" alt="" className="w-[120px]" />
-        <p className="text-white text-base w-[240px]">
-          Copyright © 2020 Nexcent ltd. All rights reserved
+        <p className="text-white text-base w-[235px]">
+          Hak Cipta © 2025 PT Jas Seluruh hak cipta dilindungi.
         </p>
         <div className="flex gap-4 mt-5">
-          <img src="/assets/ig.svg" alt="" />
-          <img src="/assets/x.svg" alt="" />
-          <img src="/assets/yt.svg" alt="" />
+          <a
+            href="https://wa.me/6287887772919"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img
+              src="/assets/whatsapp.png"
+              alt="WhatsApp"
+              className="w-[27px] h-[27px]"
+            />
+          </a>
         </div>
       </div>
       <div className="flex gap-28">
         <div className="flex flex-col">
-          <h1 className="text-white text-xl font-semibold">Company</h1>
+          <h1 className="text-white text-xl font-semibold">Perusahaan</h1>
           <ul>
             <li className="flex flex-col gap-2 mt-5">
               <a href="/#about" className="text-white text-base">

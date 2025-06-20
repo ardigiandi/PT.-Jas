@@ -48,11 +48,10 @@ function ContentPage() {
     <div className="max-w-6xl mx-auto my-[120px] flex flex-col gap-[85px] px-5 lg:px-0">
       <div className="flex flex-col lg:flex-row items-center gap-6 lg:gap-10 px-5">
         <h1 className="text-3xl font-medium  w-fit px-2 py-1">
-          Services
+          Layanan Kami
         </h1>
         <p className="text-base w-full lg:w-[580px] font-normal text-center lg:text-left">
-          At our digital marketing agency, we offer a range of services to help
-          businesses grow and succeed online. These services include
+          Kami menyediakan berbagai layanan yang dirancang khusus untuk mendukung kebutuhan dapur komersial dan industri kuliner:
         </p>
       </div>
 

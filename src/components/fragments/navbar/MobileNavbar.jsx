@@ -41,10 +41,10 @@ function MobileNavbar() {
 
   const navbarItems = [
     { name: "Home", id: "hero", icon: <HomeIcon className="w-4 h-4" /> },
+    { name: "About", id: "about", icon: <SquareLibrary className="w-4 h-4" /> },
     { name: "Services", id: "services", icon: <HammerIcon className="w-4 h-4" /> },
-    { name: "Feature", id: "feature", icon: <SquareLibrary className="w-4 h-4" /> },
     { name: "Portofolio", id: "portofolio", icon: <CircleCheck className="w-4 h-4" /> },
-    { name: "FAQ", id: "faq", icon: <CircleHelp className="w-4 h-4" /> },
+    // { name: "FAQ", id: "faq", icon: <CircleHelp className="w-4 h-4" /> },
   ];
 
   return (

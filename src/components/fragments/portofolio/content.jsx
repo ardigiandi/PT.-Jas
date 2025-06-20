@@ -93,11 +93,11 @@ function CardPortofolio() {
   return (
     <div className="max-w-6xl mx-auto my-[100px] px-6">
       <h1 className="flex justify-center text-2xl font-semibold">
-        My Latest Work
+        Karya dan Proyek Terbaru
       </h1>
-      <p className="flex justify-center mt-1 text-gray-500">
+      {/* <p className="flex justify-center mt-1 text-gray-500">
         Beberapa proyek dan karya terbaru saya.
-      </p>
+      </p> */}
 
       {/* Carousel */}
       <div
