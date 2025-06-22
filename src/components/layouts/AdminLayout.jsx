@@ -5,6 +5,8 @@ import {
   LucideBarChart2,
   LucideLogIn,
   LucideImage,
+  LucideBox,
+  LucideTags,
 } from "lucide-react";
 import DeleteConfirmationModal from "../common/DeleteConfirmationModal";
 import axiosInstance from "@/api/axiosInstance";
@@ -75,6 +77,20 @@ const AdminLayout = ({ children }) => {
               >
                 <LucideImage className="w-5 h-5" />
                 <span>Foto</span>
+              </Link>
+              <Link
+                to="/admin/items"
+                className="flex items-center space-x-2 p-2 w-full text-left rounded-lg hover:bg-gray-200"
+              >
+                <LucideBox className="w-5 h-5" />
+                <span>Item</span>
+              </Link>
+              <Link
+                to="/admin/categories"
+                className="flex items-center space-x-2 p-2 w-full text-left rounded-lg hover:bg-gray-200"
+              >
+                <LucideTags className="w-5 h-5" />
+                <span>Kategori</span>
               </Link>
               {/* Tambahin item sebanyak apapun di sini, bakal scroll di dalam */}
             </nav>

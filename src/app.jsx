@@ -12,6 +12,8 @@ import AdminDashboard from "./pages/admin/dashboard";
 import AdminHomePage from "./pages/admin/HomePage"; // Import AdminHomePage
 import AdminPortfolioPage from "./pages/admin/PortfolioPage"; // Import AdminPortfolioPage
 import AdminPhotoPage from "./pages/admin/PhotoPage"; // Import AdminPhotoPage
+import AdminItemPage from "./pages/admin/ItemPage"; // Import AdminItemPage // Add import for ItemPage
+import AdminCategoryPage from "./pages/admin/CategoryPage"; // Import AdminCategoryPage // Add import for CategoryPage
 import PrivateRoute from "./components/PrivateRoute"; // Import PrivateRoute
 import PortofolioDetail from "./components/fragments/portofoliodetail/detail";
 // import PortofolioDetail from "./pages/portofolioDetail";
@@ -58,6 +60,12 @@ function App() {
           {/* Remove create route */}
           {/* <Route path="photos/edit/:id" element={<PhotoEdit />} /> */}{" "}
           {/* Remove edit route */}
+          {/* Item Routes */} {/* Add comment for Item Routes */}
+          <Route path="items" element={<AdminItemPage />} />{" "}
+          {/* Add route for ItemPage */}
+          {/* Category Routes */} {/* Add comment for Category Routes */}
+          <Route path="categories" element={<AdminCategoryPage />} />{" "}
+          {/* Add route for CategoryPage */}
         </Route>
       </Routes>
     </>
