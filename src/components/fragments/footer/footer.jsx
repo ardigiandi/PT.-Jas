@@ -47,25 +47,6 @@ function Footer() {
             </li>
           </ul>
         </div>
-        {/* <div className="flex flex-col">
-          <h1 className="text-white text-xl font-semibold">Support</h1>
-          <ul>
-            <li className="flex flex-col gap-2 mt-5">
-              <a href="#" className="text-white text-base">
-                Help center
-              </a>
-              <a href="#" className="text-white text-base">
-                Terms of service
-              </a>
-              <a href="#" className="text-white text-base">
-                Legal
-              </a>
-              <a href="#" className="text-white text-base">
-                Privacy policy
-              </a>
-            </li>
-          </ul>
-        </div> */}
       </div>
       <img
         src="/assets/Meliuk-liuk.png"
