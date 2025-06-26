@@ -18,7 +18,7 @@ const cardList = [
     textColor: 'text-white',
     description: "Learn more",
     desc_image: "/assets/arrow.svg",
-    image: "/assets/card1.png",
+    image: "/assets/card2.png",
     bgColor: "bg-[#F58220]",
   },
   {
@@ -28,7 +28,7 @@ const cardList = [
     textColor: 'text-white',
     description: "Learn more",
     desc_image: "/assets/arrow.svg",
-    image: "/assets/card1.png",
+    image: "/assets/card3.png",
     bgColor: "bg-[#F58220]",
   },
   {
@@ -38,7 +38,7 @@ const cardList = [
     // textColor: 'bg-[#F58220]',
     description: "Learn more",
     desc_image: "/assets/arrow.svg",
-    image: "/assets/card1.png",
+    image: "/assets/card4.png",
     bgColor: "bg-[#F3F3F3]",
   },
 ];

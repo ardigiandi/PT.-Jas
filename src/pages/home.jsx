@@ -7,6 +7,7 @@ import ServiceView from "@/components/layouts/ServicesLayout";
 import CardPortofolio from "@/components/layouts/PortofolioLayouts";
 import Footer from "@/components/fragments/footer/footer";
 import Cta from "@/components/fragments/cta/cta";
+import Barang from "@/components/fragments/barang/barang";
 // import DesktopNavbar from "@/components/DesktopNavbar";
 
 function HomePage() {
@@ -31,6 +32,9 @@ function HomePage() {
         </div>
         <div id="cta">
           <Cta />
+        </div>
+        <div>
+          <Barang />
         </div>
         <div id="portofolio">
           <CardPortofolio />
